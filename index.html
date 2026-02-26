@@ -4,250 +4,443 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Getintotech — Free Developer Education. Real Credentials.</title>
+<meta name="description" content="500+ free courses, AI tutor, proctored exams, blockchain certificates. The complete developer career platform — free for every learner on earth.">
+<meta property="og:title" content="Getintotech — Free Developer Education. Real Credentials.">
+<meta property="og:description" content="Help us build the world's first completely free developer career platform.">
+<meta property="og:url" content="https://getintotech.vercel.app">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0a0a0a;
-    --white: #f5f3ee;
-    --accent: #c8f542;
-    --muted: #888;
-    --border: rgba(245,243,238,0.1);
-    --card: #141414;
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--white); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;--white:#f5f3ee;--accent:#c8f542;--muted:#888;
+  --border:rgba(245,243,238,0.09);--card:#141414;--card2:#111;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Syne',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 2.5rem;
-    border-bottom: 1px solid var(--border);
-    background: rgba(10,10,10,0.9); backdrop-filter: blur(12px);
-  }
-  .logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
-  .logo span { color: var(--accent); }
-  .nav-cta {
-    background: var(--accent); color: var(--black);
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
-    padding: 0.6rem 1.4rem; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.82; }
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.1rem;gap:.75rem;
+  border-bottom:1px solid var(--border);
+  background:rgba(10,10,10,0.93);backdrop-filter:blur(14px);
+}
+.logo{font-size:.95rem;font-weight:800;letter-spacing:-.02em;color:var(--white);text-decoration:none;white-space:nowrap;flex-shrink:0}
+.logo span{color:var(--accent)}
+.nav-links{display:none;align-items:center;gap:1.25rem}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--accent);color:var(--black);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;
+  padding:.5rem 1rem;text-decoration:none;transition:opacity .2s;white-space:nowrap;flex-shrink:0
+}
+.nav-cta:hover{opacity:.82}
+@media(min-width:640px){nav{padding:1.1rem 2rem}.nav-links{display:flex}.nav-cta{font-size:.8rem;padding:.55rem 1.2rem}}
+@media(min-width:900px){nav{padding:1.25rem 2.5rem}}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-    padding: 8rem 2.5rem 5rem; position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; top: -15%; right: -5%; width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(200,245,66,0.06) 0%, transparent 65%); pointer-events: none;
-  }
-  .eyebrow {
-    font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent);
-    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--accent); }
-  .hero h1 { font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.04em; max-width: 950px; margin-bottom: 2rem; }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero-sub { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 3rem; }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--accent); color: var(--black);
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem;
-    padding: 1rem 2rem; border: none; cursor: pointer; text-decoration: none; transition: opacity 0.2s; display: inline-block;
-  }
-  .btn-primary:hover { opacity: 0.82; }
-  .btn-ghost { color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.82rem; text-decoration: none; opacity: 0.5; transition: opacity 0.2s; }
-  .btn-ghost:hover { opacity: 1; }
+/* ── SHARED ── */
+.wrap{max-width:1200px;margin:0 auto}
+.pad{padding:3.5rem 1.1rem}
+.pad-lg{padding:4.5rem 1.1rem}
+.bg-card{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.bg-card2{background:var(--card2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.bg-accent-faint{background:rgba(200,245,66,0.04);border-top:1px solid rgba(200,245,66,0.15);border-bottom:1px solid rgba(200,245,66,0.15)}
+.section-tag{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem;display:block}
+.h2{font-size:clamp(1.65rem,5.5vw,3.25rem);font-weight:800;letter-spacing:-.035em;line-height:1.07;margin-bottom:1.1rem}
+.h2 em{font-style:normal;color:var(--accent)}
+.body-p{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--muted);line-height:1.82}
+.grid-line{display:grid;gap:1px;background:var(--border)}
+.btn-accent{display:inline-block;background:var(--accent);color:var(--black);font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;padding:.85rem 1.6rem;text-decoration:none;transition:opacity .2s}
+.btn-accent:hover{opacity:.82}
+.btn-outline{display:inline-block;border:1px solid rgba(245,243,238,0.2);color:var(--white);font-family:'DM Mono',monospace;font-size:.75rem;padding:.75rem 1.4rem;text-decoration:none;transition:all .2s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.mono{font-family:'DM Mono',monospace}
 
-  /* BUILDING BANNER */
-  .building-banner {
-    background: rgba(200,245,66,0.06); border-top: 1px solid rgba(200,245,66,0.2); border-bottom: 1px solid rgba(200,245,66,0.2);
-    padding: 1.25rem 2.5rem; display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;
-  }
-  .building-banner .tag {
-    font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--accent); background: rgba(200,245,66,0.12); padding: 0.3rem 0.7rem; white-space: nowrap; margin-top: 0.1rem;
-  }
-  .building-banner p { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+@media(min-width:640px){.pad{padding:4.5rem 2rem}.pad-lg{padding:5.5rem 2rem}}
+@media(min-width:900px){.pad{padding:5.5rem 2.5rem}.pad-lg{padding:6.5rem 2.5rem}}
 
-  /* STATS */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .stat { background: var(--black); padding: 2.5rem; text-align: center; }
-  .stat-num { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.04em; color: var(--accent); display: block; }
-  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 0.4rem; display: block; }
+/* ── HERO ── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:6.5rem 1.1rem 3.5rem;position:relative;overflow:hidden
+}
+.hero::before{
+  content:'';position:absolute;top:-10%;right:-5%;
+  width:min(600px,90vw);height:min(600px,90vw);
+  background:radial-gradient(circle,rgba(200,245,66,0.07) 0%,transparent 65%);pointer-events:none
+}
+.hero::after{
+  content:'';position:absolute;bottom:5%;left:-10%;
+  width:min(400px,60vw);height:min(400px,60vw);
+  background:radial-gradient(circle,rgba(200,245,66,0.03) 0%,transparent 65%);pointer-events:none
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.65rem
+}
+.eyebrow::before{content:'';display:inline-block;width:1.5rem;height:1px;background:var(--accent)}
+.hero h1{font-size:clamp(2.4rem,9.5vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-.045em;margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-family:'DM Mono',monospace;font-size:clamp(.82rem,2.2vw,.98rem);font-weight:300;color:var(--muted);max-width:480px;line-height:1.8;margin-bottom:2.25rem}
+.hero-actions{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.btn-ghost{color:var(--white);font-family:'DM Mono',monospace;font-size:.78rem;text-decoration:none;opacity:.45;transition:opacity .2s}
+.btn-ghost:hover{opacity:1}
+@media(min-width:640px){.hero{padding:7.5rem 2rem 4rem}}
+@media(min-width:900px){.hero{padding:8rem 2.5rem 5rem}}
 
-  /* SHARED */
-  .wrap { max-width: 1200px; margin: 0 auto; }
-  .pad { padding: 6rem 2.5rem; }
-  .section-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: block; }
-  .h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; max-width: 750px; margin-bottom: 1.5rem; }
-  .p { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--muted); max-width: 560px; line-height: 1.8; }
-  .bg-card { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .grid-1px { gap: 1px; background: var(--border); display: grid; }
+/* ── BUILDING BANNER ── */
+.building-banner{
+  background:rgba(200,245,66,0.05);
+  border-top:1px solid rgba(200,245,66,0.18);border-bottom:1px solid rgba(200,245,66,0.18);
+  padding:.9rem 1.1rem;display:flex;align-items:flex-start;gap:.85rem;flex-wrap:wrap
+}
+.banner-tag{
+  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);background:rgba(200,245,66,0.1);padding:.25rem .6rem;
+  white-space:nowrap;flex-shrink:0;margin-top:.1rem
+}
+.building-banner p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.65}
+@media(min-width:640px){.building-banner{padding:1.1rem 2rem}}
+@media(min-width:900px){.building-banner{padding:1.25rem 2.5rem}}
 
-  /* PROBLEM */
-  .problems { grid-template-columns: repeat(3, 1fr); margin-top: 4rem; }
-  .problem-card { background: var(--card); padding: 2.5rem; }
-  .problem-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 1rem; display: block; }
-  .problem-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
-  .problem-card p { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); line-height: 1.75; }
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{background:var(--black);padding:1.75rem 1.1rem;text-align:center;border:1px solid var(--border);margin:-1px 0 0 -1px}
+.stat-num{font-size:clamp(1.6rem,5vw,2.75rem);font-weight:800;letter-spacing:-.04em;color:var(--accent);display:block}
+.stat-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-top:.3rem;display:block}
+@media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
 
-  /* FEATURES */
-  .features-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem; align-items: end; }
-  .features-grid { grid-template-columns: repeat(3, 1fr); }
-  .feature-card { background: var(--black); padding: 2.25rem; position: relative; }
-  .feature-card.u::after {
-    content: 'UNIQUE'; position: absolute; top: 1.25rem; right: 1.25rem;
-    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
-    color: var(--accent); background: rgba(200,245,66,0.1); padding: 0.2rem 0.5rem;
-  }
-  .feature-emoji { font-size: 1.4rem; margin-bottom: 1rem; display: block; }
-  .feature-card h4 { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.6rem; }
-  .feature-card p { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--muted); line-height: 1.7; }
+/* ── PROBLEM ── */
+.problems{grid-template-columns:1fr;margin-top:2.5rem}
+.problem-card{background:var(--card);padding:1.75rem}
+.problem-num{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.12em;margin-bottom:.8rem;display:block}
+.problem-card h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;letter-spacing:-.02em}
+.problem-card p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.75}
+@media(min-width:640px){.problems{grid-template-columns:repeat(3,1fr)}}
 
-  /* CERT */
-  .cert-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-  .cert-mockup { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; }
-  .cert-mockup::before {
-    content: 'BLOCKCHAIN VERIFIED'; position: absolute; top: 1.25rem; right: 1.25rem;
-    font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
-    color: var(--accent); background: rgba(200,245,66,0.1); padding: 0.3rem 0.6rem;
-  }
-  .cert-mockup-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
-  .cert-name { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
-  .cert-course { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
-  .cert-tier { display: inline-block; background: var(--accent); color: var(--black); font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; padding: 0.4rem 0.9rem; margin-bottom: 2rem; }
-  .cert-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-bottom: 2rem; }
-  .cert-stat { background: var(--black); padding: 1rem; text-align: center; }
-  .cert-stat-val { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; display: block; }
-  .cert-stat-lbl { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
-  .cert-hash { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); word-break: break-all; opacity: 0.4; line-height: 1.6; }
-  .cert-copy h2 { font-size: clamp(1.75rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1.5rem; }
-  .cert-copy p { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:1fr;margin-top:2.5rem}
+.how-step{background:var(--card);padding:1.75rem;display:flex;gap:1.1rem;align-items:flex-start;border-bottom:1px solid var(--border)}
+.how-step:last-child{border-bottom:none}
+.how-num{font-size:2.25rem;font-weight:800;letter-spacing:-.04em;color:var(--accent);opacity:.22;flex-shrink:0;line-height:1;margin-top:-.15rem}
+.how-step h3{font-size:.95rem;font-weight:700;margin-bottom:.45rem;letter-spacing:-.01em}
+.how-step p{font-family:'DM Mono',monospace;font-size:.73rem;color:var(--muted);line-height:1.72}
+@media(min-width:640px){
+  .how-grid{grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+  .how-step{flex-direction:column;border-bottom:none}
+  .how-num{font-size:3rem}
+}
 
-  /* PRODUCTS */
-  .products-grid { grid-template-columns: repeat(3, 1fr); margin-top: 4rem; }
-  .product-card { background: var(--black); padding: 2.5rem; }
-  .product-card.feat { background: rgba(200,245,66,0.05); }
-  .product-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: block; }
-  .product-card h3 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
-  .product-card p { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
-  .product-price { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.2rem; }
-  .product-price-note { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+/* ── WHY NOW ── */
+.why-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
+.why-card{background:var(--black);padding:1.75rem;display:flex;gap:1rem;align-items:flex-start}
+.why-icon{width:2.25rem;height:2.25rem;background:rgba(200,245,66,0.08);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.why-card h4{font-size:.9rem;font-weight:700;margin-bottom:.45rem;letter-spacing:-.01em}
+.why-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.72}
+@media(min-width:480px){.why-grid{grid-template-columns:repeat(2,1fr)}}
 
-  /* REVENUE */
-  .revenue-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; align-items: start; }
-  .revenue-row { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
-  .revenue-row:first-child { border-top: 1px solid var(--border); }
-  .revenue-name { font-size: 0.88rem; font-weight: 600; letter-spacing: -0.01em; }
-  .revenue-detail { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
-  .revenue-val { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--accent); white-space: nowrap; margin-left: 1rem; flex-shrink: 0; }
-  .projections { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
-  .proj-row { background: var(--card); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-  .proj-label { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--muted); }
-  .proj-val { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; }
-  .proj-val.ac { color: var(--accent); }
-  .schools-note { margin-top: 1.5rem; padding: 1.75rem 2rem; background: rgba(200,245,66,0.05); border: 1px solid rgba(200,245,66,0.15); }
-  .schools-note p { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); line-height: 1.75; }
-  .schools-note strong { color: var(--white); font-weight: 500; }
+/* ── FEATURES ── */
+.features-header{display:grid;grid-template-columns:1fr;gap:1.75rem;margin-bottom:2.5rem}
+.features-grid{grid-template-columns:1fr}
+.feature-card{background:var(--black);padding:1.75rem;position:relative}
+.feature-card.u::after{
+  content:'UNIQUE';position:absolute;top:.9rem;right:.9rem;
+  font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.1em;
+  color:var(--accent);background:rgba(200,245,66,0.09);padding:.2rem .45rem
+}
+.feature-emoji{font-size:1.3rem;margin-bottom:.8rem;display:block}
+.feature-card h4{font-size:.88rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
+.feature-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.7}
+@media(min-width:480px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:860px){.features-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.features-header{grid-template-columns:1fr 1fr;gap:4rem;align-items:end}}
 
-  /* MARKET */
-  .market-numbers { grid-template-columns: repeat(3, 1fr); margin-top: 4rem; }
-  .market-number { background: var(--card); padding: 3rem 2.5rem; text-align: center; }
-  .market-number .big { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.04em; display: block; margin-bottom: 0.6rem; }
-  .market-number .big.ac { color: var(--accent); }
-  .market-number .desc { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+/* ── CERT ── */
+.cert-section{display:grid;grid-template-columns:1fr;gap:2.5rem}
+.cert-mockup{background:var(--card);border:1px solid var(--border);padding:1.75rem;position:relative}
+.cert-mockup::before{
+  content:'BLOCKCHAIN VERIFIED';position:absolute;top:.9rem;right:.9rem;
+  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;
+  color:var(--accent);background:rgba(200,245,66,0.09);padding:.25rem .55rem
+}
+.cert-mockup-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.1rem}
+.cert-name{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.2rem}
+.cert-course{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1.25rem}
+.cert-tier{display:inline-block;background:var(--accent);color:var(--black);font-family:'DM Mono',monospace;font-size:.62rem;font-weight:500;letter-spacing:.1em;padding:.35rem .8rem;margin-bottom:1.25rem}
+.cert-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:1.25rem}
+.cs{background:var(--black);padding:.8rem;text-align:center}
+.cs-val{font-size:1rem;font-weight:800;letter-spacing:-.02em;display:block}
+.cs-lbl{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted)}
+.cert-hash{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);word-break:break-all;opacity:.38;line-height:1.6}
+.cert-copy h2{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.1rem}
+.cert-copy p{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted);line-height:1.82;margin-bottom:.8rem}
+@media(min-width:768px){.cert-section{grid-template-columns:1fr 1fr;gap:5rem;align-items:center}}
 
-  /* FOUNDER */
-  .founder-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-  .founder-quote { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.3; border-left: 3px solid var(--accent); padding-left: 2rem; margin-top: 3rem; }
-  .founder-bio { margin-top: 3rem; }
-  .founder-bio h3 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
-  .founder-role { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 1.5rem; display: block; }
-  .founder-bio p { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.75rem; }
-  .founder-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); margin-top: 2rem; }
-  .founder-stat { background: var(--card); padding: 1.5rem; }
-  .founder-stat .val { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent); display: block; }
-  .founder-stat .lbl { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+/* ── COMPARISON ── */
+.comparison-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);margin-top:2.5rem}
+.comparison-table{width:100%;border-collapse:collapse;min-width:520px}
+.comparison-table th{
+  font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card);white-space:nowrap
+}
+.comparison-table th.us{color:var(--accent)}
+.comparison-table td{
+  padding:.78rem 1rem;border-bottom:1px solid var(--border);
+  font-family:'DM Mono',monospace;color:var(--muted);font-size:.68rem;vertical-align:middle
+}
+.comparison-table td:first-child{color:var(--white);font-size:.74rem;font-family:'Syne',sans-serif;font-weight:600;white-space:nowrap}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table tr:hover td{background:rgba(245,243,238,0.015)}
+.tick{color:var(--accent)}
+.cross{color:#444}
+.partial{color:#b8943a;font-size:.65rem}
 
-  /* STATUS */
-  .status-grid { grid-template-columns: repeat(4, 1fr); margin-top: 4rem; }
-  .status-item { background: var(--black); padding: 2.25rem; text-align: center; }
-  .status-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-  .status-item h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .status-item p { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); line-height: 1.65; }
-  .honest-box { margin-top: 3rem; border: 1px solid rgba(200,245,66,0.2); background: rgba(200,245,66,0.04); padding: 2rem 2.5rem; display: flex; gap: 2rem; align-items: flex-start; }
-  .honest-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; padding-top: 0.15rem; }
-  .honest-box p { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--muted); line-height: 1.75; }
+/* ── MOAT ── */
+.moat-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
+.moat-card{background:var(--black);padding:1.75rem}
+.moat-num{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);letter-spacing:.12em;margin-bottom:.85rem;display:block}
+.moat-card h4{font-size:.95rem;font-weight:700;margin-bottom:.55rem;letter-spacing:-.01em}
+.moat-card p{font-family:'DM Mono',monospace;font-size:.73rem;color:var(--muted);line-height:1.75}
+@media(min-width:480px){.moat-grid{grid-template-columns:repeat(2,1fr)}}
 
-  /* CTA */
-  .cta-wrap { background: var(--accent); padding: 7rem 2.5rem; text-align: center; }
-  .cta-wrap h2 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.04em; color: var(--black); margin-bottom: 1.25rem; }
-  .cta-wrap p { font-family: 'DM Mono', monospace; font-size: 0.88rem; color: rgba(10,10,10,0.6); max-width: 460px; margin: 0 auto 2.5rem; line-height: 1.75; }
-  .btn-dark { background: var(--black); color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 1rem 2.5rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
-  .btn-dark:hover { opacity: 0.85; }
+/* ── UNIT ECONOMICS ── */
+.unit-layout{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-top:2.5rem}
+.unit-table{width:100%;border-collapse:collapse}
+.unit-table tr{border-bottom:1px solid var(--border)}
+.unit-table tr:first-child{border-top:1px solid var(--border)}
+.unit-table td{padding:.9rem 0;font-family:'DM Mono',monospace;font-size:.76rem;vertical-align:top}
+.unit-table td:first-child{color:var(--muted);width:60%}
+.unit-table td:last-child{color:var(--white);font-weight:500;text-align:right}
+.unit-table td.accent{color:var(--accent);font-weight:700}
+.unit-highlight{background:rgba(200,245,66,0.05);border:1px solid rgba(200,245,66,0.15);padding:1.5rem;margin-top:1.5rem}
+.unit-highlight p{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--muted);line-height:1.8}
+.unit-highlight strong{color:var(--white);font-weight:500}
+@media(min-width:640px){.unit-layout{grid-template-columns:1fr 1fr}}
 
-  /* FOOTER */
-  footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  footer p { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+/* ── PRODUCTS ── */
+.products-grid{grid-template-columns:1fr;margin-top:2.5rem}
+.product-card{background:var(--black);padding:1.75rem}
+.product-card.feat{background:rgba(200,245,66,0.04)}
+.product-badge{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;display:block}
+.product-card h3{font-size:1.2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
+.product-card p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem}
+.product-price{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.2rem}
+.product-price-note{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
+@media(min-width:640px){.products-grid{grid-template-columns:repeat(3,1fr)}}
 
-  /* ANIM */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .hero .eyebrow { animation: fadeUp 0.5s ease forwards; }
-  .hero h1 { animation: fadeUp 0.6s 0.05s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.15s ease both; }
-  .hero-actions { animation: fadeUp 0.6s 0.25s ease both; }
+/* ── REVENUE ── */
+.revenue-layout{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-top:2.5rem}
+.revenue-row{display:flex;justify-content:space-between;align-items:flex-start;padding:.95rem 0;border-bottom:1px solid var(--border);gap:.85rem}
+.revenue-row:first-child{border-top:1px solid var(--border)}
+.revenue-name{font-size:.84rem;font-weight:600;letter-spacing:-.01em}
+.revenue-detail{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);margin-top:.18rem}
+.revenue-val{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--accent);white-space:nowrap;flex-shrink:0}
+.projections{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.proj-row{background:var(--card);padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:.85rem}
+.proj-label{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.proj-val{font-size:.98rem;font-weight:800;letter-spacing:-.02em}
+.proj-val.ac{color:var(--accent)}
+.schools-note{margin-top:1px;padding:1.35rem 1.5rem;background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.13)}
+.schools-note p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.78}
+.schools-note strong{color:var(--white);font-weight:500}
+@media(min-width:640px){.revenue-layout{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1.25rem 1.5rem; }
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .problems, .features-grid, .products-grid, .market-numbers, .status-grid { grid-template-columns: 1fr; }
-    .features-header, .cert-section, .revenue-layout, .founder-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .pad { padding: 4rem 1.5rem; }
-    .building-banner { padding: 1.25rem 1.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; }
-  }
-  @media (max-width: 600px) {
-    .features-grid, .status-grid { grid-template-columns: 1fr; }
-    .founder-stats { grid-template-columns: 1fr 1fr; }
-  }
+/* ── ASK ── */
+.ask-wrap{background:#0d0d0d;border-top:1px solid rgba(200,245,66,0.2);border-bottom:1px solid rgba(200,245,66,0.2)}
+.ask-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2.5rem}
+.ask-hero-num{font-size:clamp(3rem,10vw,5.5rem);font-weight:800;letter-spacing:-.05em;color:var(--accent);line-height:1;margin-bottom:.35rem}
+.ask-sub{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem}
+.ask-breakdown{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.ask-row{background:var(--card2);padding:1rem 1.35rem;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
+.ask-label{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.ask-val{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--white);white-space:nowrap;flex-shrink:0}
+.ask-return{background:rgba(200,245,66,0.06);border:1px solid rgba(200,245,66,0.18);padding:1.5rem;margin-top:1.5rem}
+.ask-return h4{font-size:.92rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
+.ask-return p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.78;margin-bottom:.5rem}
+.ask-return p strong{color:var(--white);font-weight:500}
+.ask-bridge{background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.12);padding:1.35rem;margin-top:1rem}
+.ask-bridge p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.75}
+.ask-bridge strong{color:var(--accent);font-weight:500}
+@media(min-width:640px){.ask-grid{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
+
+/* ── ROADMAP ── */
+.roadmap{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
+.roadmap-item{background:var(--black);padding:1.75rem;display:flex;flex-direction:column;gap:1rem}
+.roadmap-phase{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(200,245,66,0.08);padding:.35rem .7rem;width:fit-content}
+.roadmap-content h4{font-size:.92rem;font-weight:700;margin-bottom:.45rem}
+.roadmap-content p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.72;margin-bottom:.7rem}
+.roadmap-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.roadmap-tags span{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);border:1px solid var(--border);padding:.2rem .55rem}
+@media(min-width:640px){.roadmap{grid-template-columns:repeat(2,1fr)}}
+
+/* ── MARKET ── */
+.market-numbers{grid-template-columns:1fr;margin-top:2.5rem}
+.market-number{background:var(--card);padding:2.25rem 1.75rem;text-align:center}
+.market-number .big{font-size:clamp(2rem,6vw,3.75rem);font-weight:800;letter-spacing:-.04em;display:block;margin-bottom:.5rem}
+.market-number .big.ac{color:var(--accent)}
+.market-number .desc{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.65}
+@media(min-width:640px){.market-numbers{grid-template-columns:repeat(3,1fr)}}
+
+/* ── READY ── */
+.ready-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2.5rem}
+.ready-col h3{font-size:clamp(1.35rem,3vw,2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1.25rem;line-height:1.15}
+.ready-col h3 em{font-style:normal;color:var(--accent)}
+.ready-list{display:flex;flex-direction:column;gap:0}
+.ready-item{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 0;border-bottom:1px solid var(--border)}
+.ready-item:first-child{border-top:1px solid var(--border)}
+.ready-check{color:var(--accent);font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.ready-item-text h5{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+.ready-item-text p{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);line-height:1.65}
+.ready-what-left{background:rgba(200,245,66,0.05);border:1px solid rgba(200,245,66,0.18);padding:1.5rem;margin-top:0}
+.ready-what-left h4{font-size:.9rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
+.ready-what-left p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.78;margin-bottom:.5rem}
+.ready-what-left p:last-child{margin-bottom:0}
+.ready-what-left strong{color:var(--white);font-weight:500}
+@media(min-width:640px){.ready-grid{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
+
+/* ── CROWDFUNDING ── */
+.crowd-inner{max-width:820px;margin:0 auto;text-align:center}
+.crowd-inner h2{font-size:clamp(1.65rem,5.5vw,3rem);font-weight:800;letter-spacing:-.035em;line-height:1.07;margin-bottom:1.1rem}
+.crowd-inner h2 em{font-style:normal;color:var(--accent)}
+.crowd-inner>.body-p{max-width:540px;margin:0 auto 2.25rem}
+.tiers{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-bottom:2.25rem;text-align:left}
+.tier{background:var(--card);padding:1.5rem}
+.tier.featured{background:rgba(200,245,66,0.05)}
+.tier-amount{font-size:1.4rem;font-weight:800;letter-spacing:-.03em;color:var(--accent);margin-bottom:.35rem}
+.tier-name{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.65rem}
+.tier p{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);line-height:1.68}
+@media(min-width:480px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.progress-wrap{margin-bottom:2.25rem}
+.progress-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.65rem;flex-wrap:wrap;gap:.5rem}
+.progress-raised{font-size:1.4rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+.progress-goal{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted)}
+.progress-bar{height:5px;background:rgba(245,243,238,0.07)}
+.progress-fill{height:100%;background:var(--accent);width:0%;transition:width 1.2s ease}
+.progress-meta{display:flex;justify-content:space-between;margin-top:.55rem;flex-wrap:wrap;gap:.35rem}
+.progress-meta span{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted)}
+.crowd-cta{display:flex;flex-direction:column;gap:.85rem;align-items:center}
+.crowd-main-btn{
+  display:inline-flex;align-items:center;gap:.65rem;
+  background:var(--accent);color:var(--black);
+  font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;
+  padding:1rem 2.25rem;text-decoration:none;transition:opacity .2s
+}
+.crowd-main-btn:hover{opacity:.85}
+.crowd-note{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
+@media(min-width:480px){.crowd-cta{flex-direction:row;justify-content:center}}
+
+/* ── RISKS ── */
+.risks-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
+.risk-card{background:var(--black);padding:1.75rem}
+.risk-card .risk-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#b8943a;margin-bottom:.75rem;display:block}
+.risk-card h4{font-size:.9rem;font-weight:700;margin-bottom:.5rem}
+.risk-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.75}
+.risk-card p strong{color:var(--white);font-weight:500}
+@media(min-width:480px){.risks-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:768px){.risks-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* ── FOUNDER ── */
+.founder-layout{display:grid;grid-template-columns:1fr;gap:2.5rem}
+.founder-quote{font-size:clamp(1.1rem,3.5vw,1.7rem);font-weight:700;letter-spacing:-.03em;line-height:1.3;border-left:3px solid var(--accent);padding-left:1.35rem;margin-top:2rem}
+.founder-bio{margin-top:2rem}
+.founder-bio h3{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.3rem}
+.founder-role{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.06em;margin-bottom:1.1rem;display:block}
+.founder-bio p{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--muted);line-height:1.82;margin-bottom:.7rem}
+.founder-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:1.75rem}
+.founder-stat{background:var(--card);padding:1.1rem}
+.founder-stat .val{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--accent);display:block}
+.founder-stat .lbl{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted)}
+@media(min-width:640px){.founder-layout{grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start}}
+
+/* ── FAQ ── */
+.faq-list{margin-top:2.5rem;display:flex;flex-direction:column}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;gap:.85rem;
+  padding:1.1rem 0;cursor:pointer;user-select:none;
+  font-size:.9rem;font-weight:700;letter-spacing:-.01em;
+  background:none;border:none;color:var(--white);text-align:left;width:100%;
+  font-family:'Syne',sans-serif;line-height:1.3
+}
+.faq-arrow{color:var(--accent);font-size:1.1rem;transition:transform .25s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{font-family:'DM Mono',monospace;font-size:.77rem;color:var(--muted);line-height:1.82;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:1.1rem}
+
+/* ── INVESTORS NOTE ── */
+.investors-note{background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.18);padding:1.75rem;margin-top:2.5rem}
+.investors-note h4{font-size:.92rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
+.investors-note p{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);line-height:1.8;margin-bottom:.5rem}
+.investors-note p:last-child{margin-bottom:0}
+.investors-note strong{color:var(--white);font-weight:500}
+
+/* ── CTA ── */
+.cta-wrap{background:var(--accent);padding:4.5rem 1.1rem;text-align:center}
+.cta-wrap h2{font-size:clamp(1.75rem,6.5vw,3.75rem);font-weight:800;letter-spacing:-.04em;color:var(--black);margin-bottom:1rem}
+.cta-wrap p{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(10,10,10,0.6);max-width:400px;margin:0 auto 2rem;line-height:1.75}
+.cta-buttons{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap}
+.btn-dark{display:inline-block;background:var(--black);color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;padding:.9rem 1.75rem;text-decoration:none;transition:opacity .2s}
+.btn-dark:hover{opacity:.85}
+.btn-dark-outline{display:inline-block;border:1.5px solid rgba(10,10,10,0.3);color:var(--black);font-family:'DM Mono',monospace;font-size:.75rem;padding:.85rem 1.5rem;text-decoration:none;transition:opacity .2s}
+.btn-dark-outline:hover{opacity:.65}
+@media(min-width:640px){.cta-wrap{padding:5.5rem 2rem}}
+@media(min-width:900px){.cta-wrap{padding:6.5rem 2.5rem}}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:1.75rem 1.1rem;display:flex;flex-direction:column;gap:.65rem}
+footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
+@media(min-width:640px){footer{flex-direction:row;align-items:center;justify-content:space-between;padding:2rem 2.5rem}}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero .eyebrow{animation:fadeUp .5s ease forwards}
+.hero h1{animation:fadeUp .6s .06s ease both}
+.hero-sub{animation:fadeUp .6s .14s ease both}
+.hero-actions{animation:fadeUp .6s .22s ease both}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="logo">get<span>into</span>tech</a>
-  <a href="mailto:lekanakinuli@gmail.com" class="nav-cta">Contact Founder</a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#ask">The Ask</a>
+    <a href="#fund">Support</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="nav-cta">Donate ↗</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <p class="eyebrow">Pre-Seed — Seeking Investment</p>
-  <h1>Every developer<br>deserves a <em>credential</em><br>they can prove.</h1>
-  <p class="hero-sub">500+ free courses. Proctored exams. Blockchain-verified certificates. A complete career platform for every developer on earth — at zero cost to them.</p>
-  <div class="hero-actions">
-    <a href="mailto:lekanakinuli@gmail.com" class="btn-primary">Talk to the founder</a>
-    <a href="#problem" class="btn-ghost">See the problem ↓</a>
+  <div class="wrap">
+    <p class="eyebrow">Pre-Seed · Open for Investment &amp; Supporters</p>
+    <h1>Every developer<br>deserves a <em>credential</em><br>they can prove.</h1>
+    <p class="hero-sub">500+ free courses. AI tutor. Proctored exams. Blockchain-verified certificates employers actually trust — at zero cost to learners, forever.</p>
+    <div class="hero-actions">
+      <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="btn-accent">Support the Build</a>
+      <a href="#problem" class="btn-ghost">See the problem ↓</a>
+    </div>
   </div>
 </section>
 
-<!-- HONEST BANNER -->
+<!-- BANNER -->
 <div class="building-banner">
-  <span class="tag">In Development</span>
-  <p>We have not launched yet. A 7+ year engineer is building this. Full specification: 164 sections, 800+ features planned, 4-week build-to-launch plan. We are raising to ship it.</p>
+  <span class="banner-tag">Building Now</span>
+  <p>The platform is fully designed — 164-section spec, complete design system, 500+ courses configured. We are raising to run the code we have already written in our heads.</p>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat"><span class="stat-num">100M+</span><span class="stat-label">people learning to code globally</span></div>
-  <div class="stat"><span class="stat-num">95%</span><span class="stat-label">dropout rate on free platforms</span></div>
+  <div class="stat"><span class="stat-num">100M+</span><span class="stat-label">learning to code globally</span></div>
+  <div class="stat"><span class="stat-num">95%</span><span class="stat-label">dropout rate — free platforms</span></div>
   <div class="stat"><span class="stat-num">$15K</span><span class="stat-label">average bootcamp cost</span></div>
   <div class="stat"><span class="stat-num">$0</span><span class="stat-label">cost to learn on Getintotech</span></div>
 </div>
@@ -256,229 +449,208 @@
 <section class="pad" id="problem">
   <div class="wrap">
     <span class="section-tag">The Problem</span>
-    <h2 class="h2">Learning to code is free. Proving it costs everything.</h2>
-    <p class="p">The credentials employers trust — degrees, bootcamps, certifications — are out of reach for most of the world. Free platforms have 95% dropout rates. The gap is not ability. It is access.</p>
-    <div class="grid-1px problems">
-      <div class="problem-card">
-        <span class="problem-num">01</span>
-        <h3>No trusted credential</h3>
-        <p>GitHub profiles are noise. Portfolios prove nothing. Without a verifiable credential, a year of real learning is invisible to every employer who does not already know you.</p>
-      </div>
-      <div class="problem-card">
-        <span class="problem-num">02</span>
-        <h3>Free education does not work</h3>
-        <p>freeCodeCamp and YouTube made knowledge accessible. But there is no structure, no AI tutor, no community, and no clear path from learning to employment.</p>
-      </div>
-      <div class="problem-card">
-        <span class="problem-num">03</span>
-        <h3>Children are left out</h3>
-        <p>Schools want to teach coding. Quality platforms are expensive. Most school coding tools are too complex for regular teachers to deploy and actually keep using.</p>
-      </div>
+    <h2 class="h2">Learning to code is free.<br>Proving it costs everything.</h2>
+    <p class="body-p" style="max-width:520px;margin-bottom:0">The credentials employers trust are priced out of reach for most of the world. Free platforms have 95% dropout rates. The gap is not ability. It is access.</p>
+    <div class="grid-line problems">
+      <div class="problem-card"><span class="problem-num">01</span><h3>No trusted credential</h3><p>GitHub profiles are noise. Portfolios prove nothing. Without a verifiable credential, a year of real learning is invisible to every employer who does not already know you.</p></div>
+      <div class="problem-card"><span class="problem-num">02</span><h3>Free education does not work</h3><p>freeCodeCamp and YouTube made knowledge accessible. But no structure, no AI tutor, no community, no clear path from learning to employment.</p></div>
+      <div class="problem-card"><span class="problem-num">03</span><h3>Children are left out</h3><p>Schools want to teach coding. Quality platforms are expensive. Most school coding tools are too complex for regular teachers to actually deploy and keep using.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="bg-card pad">
+  <div class="wrap">
+    <span class="section-tag">How It Works</span>
+    <h2 class="h2">From zero to <em>employed</em> —<br>we own the whole pipeline.</h2>
+    <div class="how-grid">
+      <div class="how-step"><div class="how-num">1</div><div><h3>Learn for free</h3><p>Sign up, take a placement test, skip what you know. AI tutor available 24/7. Spaced repetition built in. Works on any device, even offline.</p></div></div>
+      <div class="how-step"><div class="how-num">2</div><div><h3>Earn a real credential</h3><p>Sit a 90-minute proctored live-coding exam. Unique test cases per attempt. Pass and get a blockchain-verified certificate any employer can verify in seconds.</p></div></div>
+      <div class="how-step"><div class="how-num">3</div><div><h3>Get hired</h3><p>Apply with AI cover letters built from your actual scores. Interview simulator. Offer letter analyser. First lesson to first salary — we own the full pipeline.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY NOW -->
+<section class="pad">
+  <div class="wrap">
+    <span class="section-tag">Why Now</span>
+    <h2 class="h2">Four tailwinds hit at the<br>exact same time.</h2>
+    <p class="body-p" style="max-width:540px;margin-bottom:0">Getintotech would not have been possible 5 years ago. All four of these shifts happened between 2022 and 2025 — and they all point at us.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🤖</div><div><h4>AI made personalised tutoring free</h4><p>Before LLMs, a personal tutor cost $50–$200/hour. Claude now delivers Socratic tutoring for fractions of a cent. For the first time, every learner on earth can have a 24/7 tutor in their own language.</p></div></div>
+      <div class="why-card"><div class="why-icon">⛓️</div><div><h4>Blockchain made permanent credentials cheap</h4><p>Minting a certificate hash on Polygon costs under $0.01. A credential that survives the platform, cannot be faked, and any employer can verify in seconds — that was technically impossible to do cheaply before 2021.</p></div></div>
+      <div class="why-card"><div class="why-icon">🌍</div><div><h4>Remote work made global credentials matter</h4><p>A developer in Lagos can now work for a company in London without leaving home. But only if their credential is trusted globally. Physical geography no longer limits talent — credential recognition does.</p></div></div>
+      <div class="why-card"><div class="why-icon">🏛️</div><div><h4>Coding literacy became a government priority</h4><p>50+ countries have launched mandatory coding curricula since 2020. Schools are legally required to teach it. Most have no idea what platform to use. That is our schools market — and it is government-mandated.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- FEATURES -->
-<div class="bg-card pad" id="features">
+<div class="bg-card2 pad-lg" id="features">
   <div class="wrap">
     <div class="features-header">
       <div>
         <span class="section-tag">What Makes Us Different</span>
         <h2 class="h2">22 features. Nobody has built all of them together. For free.</h2>
       </div>
-      <p class="p">Every platform solves one piece — a course, a job board, a certificate. We are building the only platform that owns the complete pipeline from first lesson to employed developer. At zero cost to learners. Features marked <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:0.78rem;">UNIQUE</span> do not exist anywhere else.</p>
+      <p class="body-p">Every platform solves one piece. We own the complete pipeline from first lesson to employed developer. Features marked <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:.76rem">UNIQUE</span> do not exist anywhere else.</p>
     </div>
-
-    <div class="grid-1px features-grid">
-
-      <div class="feature-card u">
-        <span class="feature-emoji">📜</span>
-        <h4>Proctored Blockchain Certificates</h4>
-        <p>90-min live coding exam. Unique test cases per attempt — cannot be Googled or shared. Three tiers: Pass, Merit, Distinction. Certificate hash stored permanently on Polygon. Any employer verifies in seconds via public link or API, no account needed.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">⚔️</span>
-        <h4>Arena — Multiplayer Coding Battles</h4>
-        <p>Real-time coding battles: Sprint, Debug, Code Golf, Team 3v3, Refactor. Elo rating per language. Spectator mode with live chat. Employer spectator mode — companies watch live and directly invite top performers to interview.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🤝</span>
-        <h4>Collab — Pair Programming</h4>
-        <p>Matched by level, language, and timezone. Shared editor with voice. Driver/navigator rotation every 20 minutes. Post-session mutual rating generates a collaboration score — visible on profile and sent with every job application.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🧠</span>
-        <h4>Exam Readiness Prediction</h4>
-        <p>Before any exam attempt, the platform shows a probability score: "You have a 73% chance of passing. Weakest areas: closures (47%), async/await (52%)." Two options: sit the exam or address weak areas first. The curated review session is generated automatically.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🗺️</span>
-        <h4>Knowledge Map Visualisation</h4>
-        <p>Interactive graph of every concept learned. Green = strong, yellow = developing, red = weak. Click any node to jump to that lesson for review. Shareable. A simplified version is visible to employers on the public portfolio page.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🏆</span>
-        <h4>Developer Reputation Score</h4>
-        <p>Composite score: certificate tier (40%), exam history, code quality, Arena Elo, collaboration score, community contribution, freelance ratings, mentor ratings. Percentile rank: "Top 8% of all Getintotech developers." Queryable by employers via a public API.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">✍️</span>
-        <h4>Cover Letter AI</h4>
-        <p>When applying for a job, the platform knows the learner's certificates, scores, projects, and Arena rank. AI generates a personalised cover letter in 10 seconds using actual performance data. No other job board does this.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">📊</span>
-        <h4>Offer Letter Analyser</h4>
-        <p>Paste a job offer. Platform identifies whether the salary is fair for the role and market, flags missing clauses, compares to similar offers in the dataset, and generates a specific negotiation script for every weak point.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🧪</span>
-        <h4>Teach It Back Mode</h4>
-        <p>After any lesson, explain the concept to the AI as if to a complete beginner. The AI evaluates accuracy, completeness, and asks targeted follow-up questions to expose any gaps. Based on the Feynman Technique. Counts as a streak day.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🔋</span>
-        <h4>Learning Fatigue Detection</h4>
-        <p>At 60 minutes: gentle suggestion to take a 10-minute break. At 90: stronger recommendation. At 2 hours: "Your brain has processed a lot today. Come back tomorrow." We optimise for real retention, not screen time. Anti-Duolingo by design.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🌍</span>
-        <h4>Purchasing Power Parity Pricing</h4>
-        <p>Pro features cost the equivalent of one meal per month in every economy. A developer in India pays ₹150. In Indonesia, Rp 25,000. In the US, $5. Same platform. Same exams. Same certificates. No developer is priced out of Pro features.</p>
-      </div>
-
-      <div class="feature-card u">
-        <span class="feature-emoji">🌐</span>
-        <h4>Developer Directory + Reputation API</h4>
-        <p>Searchable directory of all opt-in certified developers. Filterable by language, tier, availability, and location. Reputation score queryable by employers and ATS systems via a documented public API with HMAC-signed webhooks.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🤖</span>
-        <h4>AI Tutor in Your Language</h4>
-        <p>Powered by Claude. Socratic method — never gives the answer directly, guides the learner to find it. Responds in the learner's language automatically. Opens proactively after 5 minutes without progress. Free: 10 messages/day. Pro: unlimited.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🎙️</span>
-        <h4>Interview Simulator</h4>
-        <p>Claude plays a technical interviewer via voice. Phone screen, technical round, system design, behavioural. Company-specific prep patterns. Real interview questions tagged by company. Detailed feedback report after every session. Pro-only.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">💼</span>
-        <h4>Job Board — Salary Mandatory</h4>
-        <p>No "competitive salary." Every listing requires a real salary range. Ghost job detection — listings auto-expire after 30 days. Company trust score on every listing shows response rate, offer rate, and candidate feedback.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🧑‍🏫</span>
-        <h4>Mentor Marketplace</h4>
-        <p>Certificate required to become a mentor — quality is enforced. Escrow payment held until session confirmed. 15% platform commission. Office hours: free weekly group sessions from top-rated mentors. Group sessions: 1 mentor, 5 learners.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">💰</span>
-        <h4>Freelance Board with Escrow</h4>
-        <p>Certified developers only can apply. Client deposits funds at project start. Auto-release after client approval. Platform dispute resolution. Portfolio integration — completed projects added automatically. 10% commission.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🔬</span>
-        <h4>Code Quality Scanner</h4>
-        <p>Paste code or a GitHub URL. Returns security vulnerabilities, performance issues, code smell, test coverage, complexity score, and line-by-line recommendations. Shareable quality badge. Free for learners. Paid for companies.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🖥️</span>
-        <h4>Full In-Browser IDE</h4>
-        <p>Terminal, file system, Git, package manager, local server — all in the browser. Pre-configured per lesson. Works on a Chromebook, a low-end Android, a phone. No install. No setup. Just open and code.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🧬</span>
-        <h4>Spaced Repetition Built In</h4>
-        <p>SM-2 algorithm schedules concept reviews at increasing intervals. Daily review card in dashboard. Deliberate practice mode generates infinite variations of mastered concepts. Learning science built into every design decision.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🎯</span>
-        <h4>Placement Tests — Skip Ahead</h4>
-        <p>Experienced learners test out of content they already know in 5–10 minutes. Start exactly where they should. No sitting through basics mastered years ago. Score stored and visible on profile.</p>
-      </div>
-
-      <div class="feature-card">
-        <span class="feature-emoji">🏫</span>
-        <h4>Getintotech Schools</h4>
-        <p>Full classroom management for schools worldwide. Age-appropriate curriculum for ages 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot, classroom celebration animations. $10/month for a class of 35.</p>
-      </div>
-
+    <div class="grid-line features-grid">
+      <div class="feature-card u"><span class="feature-emoji">📜</span><h4>Proctored Blockchain Certificates</h4><p>90-min live coding exam. Unique test cases per attempt — cannot be Googled. Three tiers: Pass, Merit, Distinction. Hash on Polygon. Employer verifies in seconds, no account needed.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">⚔️</span><h4>Arena — Multiplayer Coding Battles</h4><p>Real-time battles: Sprint, Debug, Code Golf, Team 3v3. Elo rating per language. Employer spectator mode — companies watch live and invite top performers directly to interview.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🤝</span><h4>Collab — Pair Programming</h4><p>Matched by level, language, timezone. Shared editor with voice. Driver/navigator rotation. Collaboration score visible on profile and sent with every job application.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🧠</span><h4>Exam Readiness Prediction</h4><p>Before any exam: "73% chance of passing. Weak areas: closures, async/await." Two options: sit the exam or fix weak areas — curated review generated automatically.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🗺️</span><h4>Knowledge Map Visualisation</h4><p>Interactive graph of every concept learned. Colour-coded by strength. Click any node to jump to that lesson. Shareable. Employer-visible on public portfolio.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🏆</span><h4>Developer Reputation Score</h4><p>Composite: cert tier, code quality, Arena Elo, collaboration, freelance ratings. Percentile rank: "Top 8% of developers." Queryable by employers and ATS systems via public API.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">✍️</span><h4>Cover Letter AI</h4><p>Platform knows your certs, scores, and projects. When you apply, AI generates a personalised cover letter in 10 seconds using your actual performance data. No other job board does this.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">📊</span><h4>Offer Letter Analyser</h4><p>Paste a job offer. Platform flags if salary is fair, finds missing clauses, compares to similar offers, and generates a negotiation script for every weak point.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🧪</span><h4>Teach It Back Mode</h4><p>After any lesson, explain the concept to the AI as if to a beginner. AI evaluates accuracy and asks targeted follow-ups to expose gaps. Based on the Feynman Technique.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🔋</span><h4>Learning Fatigue Detection</h4><p>At 60 min: gentle break suggestion. At 90: stronger. At 2 hours: "Come back tomorrow." We optimise for real retention, not screen time. Anti-Duolingo by design.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🌍</span><h4>Purchasing Power Parity Pricing</h4><p>Pro costs one meal per month in every economy. India: ₹150. Indonesia: Rp 25,000. US: $5. Same platform. Same exams. Same certificates. Nobody priced out.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🌐</span><h4>Developer Directory + Reputation API</h4><p>Searchable directory of certified developers. Filter by language, tier, availability, location. Reputation score queryable by employers via documented public API.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🤖</span><h4>AI Tutor in Your Language</h4><p>Powered by Claude. Socratic method — never gives answers directly. Responds in the learner's language automatically. Opens proactively after 5 minutes without progress.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🎙️</span><h4>Interview Simulator</h4><p>Claude plays technical interviewer via voice. Phone screen, technical, system design, behavioural. Company-specific prep. Detailed feedback report on every session.</p></div>
+      <div class="feature-card"><span class="feature-emoji">💼</span><h4>Job Board — Salary Mandatory</h4><p>No "competitive salary." Every listing requires a real range. Ghost job detection — listings auto-expire after 30 days. Company trust score on every listing.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🧑‍🏫</span><h4>Mentor Marketplace</h4><p>Certificate required to mentor — quality enforced. Escrow payment held until session confirmed. 15% commission. Free weekly group sessions from top mentors.</p></div>
+      <div class="feature-card"><span class="feature-emoji">💰</span><h4>Freelance Board with Escrow</h4><p>Certified developers only. Client deposits at project start. Auto-release after approval. Platform dispute resolution. Completed projects auto-added to portfolio.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🔬</span><h4>Code Quality Scanner</h4><p>Paste code or a GitHub URL. Returns security issues, performance, code smell, test coverage, complexity. Shareable quality badge. Free for learners.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🖥️</span><h4>Full In-Browser IDE</h4><p>Terminal, file system, Git, package manager, local server — in the browser. Pre-configured per lesson. Works on a Chromebook, a phone, any device. No setup.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🧬</span><h4>Spaced Repetition Built In</h4><p>SM-2 algorithm schedules concept reviews at increasing intervals. Daily review card. Deliberate practice generates infinite variations of mastered concepts.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🎯</span><h4>Placement Tests — Skip Ahead</h4><p>Test out of what you already know in 5–10 minutes. Start exactly where you should. Score stored on profile.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🏫</span><h4>Getintotech Schools</h4><p>Full classroom management. Age 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot. $10/month per school. 50% off low-income schools.</p></div>
     </div>
   </div>
 </div>
 
 <!-- CERT -->
-<section class="pad">
+<div class="bg-card pad">
   <div class="wrap cert-section">
     <div class="cert-mockup">
-      <p class="cert-mockup-title">Certificate of Completion</p>
+      <p class="cert-mockup-label">Certificate of Completion</p>
       <p class="cert-name">Amara Okafor</p>
       <p class="cert-course">Advanced JavaScript — Full Stack</p>
       <span class="cert-tier">DISTINCTION</span>
       <div class="cert-stats">
-        <div class="cert-stat"><span class="cert-stat-val">97%</span><span class="cert-stat-lbl">Score</span></div>
-        <div class="cert-stat"><span class="cert-stat-val">Top 3%</span><span class="cert-stat-lbl">Percentile</span></div>
-        <div class="cert-stat"><span class="cert-stat-val">Live</span><span class="cert-stat-lbl">Proctored</span></div>
+        <div class="cs"><span class="cs-val">97%</span><span class="cs-lbl">Score</span></div>
+        <div class="cs"><span class="cs-val">Top 3%</span><span class="cs-lbl">Percentile</span></div>
+        <div class="cs"><span class="cs-val">Live</span><span class="cs-lbl">Proctored</span></div>
       </div>
-      <p class="cert-hash">Blockchain hash: 0x4f2c8d1e9a3b7f6c0e5d2a8b1c4f9e3d7a2c5f8b1e4d7c0a3f6b9e2d5c8a1f4e7b0d3c6f9a2b5e8c1d4f7a0b3e6c9</p>
+      <p class="cert-hash">Blockchain hash: 0x4f2c8d1e9a3b7f6c0e5d2a8b1c4f9e3d7a2c5f8b1e4d7c0a3f6b9e2d5c8a1f4e7b</p>
     </div>
     <div class="cert-copy">
       <span class="section-tag">The Certificate</span>
       <h2>A credential employers actually trust. Earned, not bought.</h2>
-      <p>The exam is 90 minutes of live coding. Unique test cases generated for every attempt — impossible to Google, impossible to share, impossible to cheat.</p>
+      <p>The exam is 90 minutes of live coding. Unique test cases generated for every attempt — impossible to Google, share, or cheat.</p>
       <p>The certificate hash is stored permanently on the Polygon blockchain. Any employer anywhere can verify it in under 10 seconds. No account required. The record survives even if this platform shuts down.</p>
       <p>The exam is free. The certificate is free. The verification is free for employers.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<section class="pad">
+  <div class="wrap">
+    <span class="section-tag">How We Compare</span>
+    <h2 class="h2">Everyone solves one piece.<br>We own the whole pipeline.</h2>
+    <div class="comparison-scroll">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="us">Getintotech</th>
+            <th>freeCodeCamp</th>
+            <th>Coursera</th>
+            <th>Udemy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Free to learn</td><td class="tick">✓</td><td class="tick">✓</td><td class="partial">Partial</td><td class="cross">✗ Paid</td></tr>
+          <tr><td>Proctored live-coding exam</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Blockchain-verified certificates</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>AI tutor (Socratic method)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Multiplayer coding battles</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Pair programming with score</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Job board with mandatory salary</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>AI cover letter from your data</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Interview simulator (voice)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Offer letter analyser</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Developer reputation score</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Spaced repetition built in</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Mentor marketplace</td><td class="tick">✓</td><td class="cross">✗</td><td class="partial">External</td><td class="cross">✗</td></tr>
+          <tr><td>Freelance board with escrow</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Schools product (age 6–17)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>PPP-adjusted pricing globally</td><td class="tick">✓</td><td>N/A</td><td class="cross">✗</td><td class="partial">Partial</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MOAT -->
+<div class="bg-card pad">
+  <div class="wrap">
+    <span class="section-tag">Competitive Moat</span>
+    <h2 class="h2">Four reasons this cannot be<br>copied in 6 months.</h2>
+    <p class="body-p" style="max-width:520px;margin-bottom:0">Features can be copied. These cannot.</p>
+    <div class="moat-grid">
+      <div class="moat-card"><span class="moat-num">Moat 01</span><h4>Network Effects — Employers</h4><p>Employers only trust certificates after seeing many certified developers perform well. Every hire from Getintotech builds credibility. A competitor starting today has zero employer trust. We accumulate it with every hire.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 02</span><h4>Blockchain Permanence — First Mover</h4><p>Our blockchain certificate records are permanent and growing. Every certificate issued is a data point that anchors our credibility. A later entrant starts with zero immutable records.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 03</span><h4>Reputation Score — Data Flywheel</h4><p>The developer reputation score gets more accurate with more users. More users = better scores = more employer trust = more users. The score is impossible to replicate without years of transaction data.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 04</span><h4>Schools — Annual Contracts, Near-Zero Churn</h4><p>Schools sign annual contracts and rarely switch tools mid-year. Once a school trains teachers on our platform, the switching cost is enormous. 100 schools in year one = 95+ renewals in year two.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT ECONOMICS -->
+<section class="pad">
+  <div class="wrap">
+    <span class="section-tag">Schools Unit Economics</span>
+    <h2 class="h2">The most defensible SaaS unit economics<br>in edtech.</h2>
+    <div class="unit-layout">
+      <div>
+        <table class="unit-table">
+          <tr><td>Customer acquisition cost (school)</td><td class="accent">~$0</td></tr>
+          <tr><td>Average contract value (annual)</td><td>$324 – $804</td></tr>
+          <tr><td>Gross margin</td><td class="accent">~85%</td></tr>
+          <tr><td>Payback period</td><td class="accent">Month 1</td></tr>
+          <tr><td>Annual churn rate (estimated)</td><td>&lt;5%</td></tr>
+          <tr><td>LTV (5-year, avg school)</td><td class="accent">$2,700+</td></tr>
+          <tr><td>10,000 schools × avg $27/mo</td><td class="accent">$3.24M ARR</td></tr>
+          <tr><td>1,000,000 schools × avg $27/mo</td><td class="accent">$324M ARR</td></tr>
+        </table>
+        <div class="unit-highlight">
+          <p>Schools are acquired through SEO, word of mouth between teachers, and government mandates — not paid ads. <strong>CAC is near zero.</strong> A school at $27/month paying for 5 years is $1,620 of revenue on $0 of acquisition cost. There is no paid CAC business with these numbers in edtech.</p>
+        </div>
+      </div>
+      <div>
+        <div class="projections">
+          <div class="proj-row"><span class="proj-label">Month 1 — 500 learners</span><span class="proj-val">~$148/mo</span></div>
+          <div class="proj-row"><span class="proj-label">Month 3 — 2,000 learners</span><span class="proj-val">~$1,830/mo</span></div>
+          <div class="proj-row"><span class="proj-label">Month 6 — 8,000 learners</span><span class="proj-val">~$7,500/mo</span></div>
+          <div class="proj-row"><span class="proj-label">Month 12 — 25K learners</span><span class="proj-val ac">$25–40K/mo</span></div>
+          <div class="proj-row"><span class="proj-label">10,000 schools milestone</span><span class="proj-val ac">$270K/mo</span></div>
+          <div class="proj-row"><span class="proj-label">100,000 schools</span><span class="proj-val ac">$2.7M/mo</span></div>
+          <div class="proj-row"><span class="proj-label">1M schools (0.77% of global)</span><span class="proj-val ac">$27M/mo</span></div>
+        </div>
+        <div class="schools-note">
+          <p><strong>130M schools globally.</strong> 1M schools is 0.77% of the market. At 50+ countries mandating coding curricula, 0.77% is a conservative number. This is not a moonshot — it is a market penetration question.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
-<div class="bg-card pad">
+<div class="bg-card2 pad">
   <div class="wrap">
     <span class="section-tag">Three Products. One Mission.</span>
-    <h2 class="h2">Learners are always free. Revenue comes from everyone else.</h2>
-    <div class="grid-1px products-grid">
-      <div class="product-card feat">
-        <span class="product-badge">★ Core Product</span>
-        <h3>Getintotech Learn</h3>
-        <p>Free for every learner on earth. 500+ courses, AI tutor, proctored exams, blockchain certificates, Arena battles, pair programming, job board, interview simulator, mentor marketplace, freelance board. No paywalls. Ever.</p>
-        <div class="product-price">$0</div>
-        <div class="product-price-note">forever, for learners</div>
-      </div>
-      <div class="product-card">
-        <span class="product-badge">B2B · Primary Revenue</span>
-        <h3>Getintotech Schools</h3>
-        <p>Full classroom management for schools worldwide. Age 6–17. Teacher dashboards, parent portal, lesson plan library, Byte mascot, classroom celebration animations. Low-income schools: 50% off, self-selected.</p>
-        <div class="product-price">$10–$67</div>
-        <div class="product-price-note">per school per month</div>
-      </div>
-      <div class="product-card">
-        <span class="product-badge">B2B · Revenue</span>
-        <h3>Getintotech for Companies</h3>
-        <p>Team training, skills gap analysis, bulk certificate verification, talent pool access, and ATS integrations with Greenhouse, Lever, and Workday. Skills Intelligence API for market data.</p>
-        <div class="product-price">$299–$699</div>
-        <div class="product-price-note">per month</div>
-      </div>
+    <h2 class="h2">Learners are always free.<br>Revenue comes from everyone else.</h2>
+    <div class="grid-line products-grid">
+      <div class="product-card feat"><span class="product-badge">★ Core Product</span><h3>Getintotech Learn</h3><p>Free for every learner on earth. 500+ courses, AI tutor, proctored exams, blockchain certs, Arena, Collab, job board, interview simulator, mentor marketplace, freelance board. No paywalls. Ever.</p><div class="product-price">$0</div><div class="product-price-note">forever, for learners</div></div>
+      <div class="product-card"><span class="product-badge">B2B · Primary Revenue</span><h3>Getintotech Schools</h3><p>Full classroom management for schools worldwide. Age 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot. 50% off low-income schools.</p><div class="product-price">$10–$67</div><div class="product-price-note">per school per month</div></div>
+      <div class="product-card"><span class="product-badge">B2B · Revenue</span><h3>Getintotech for Companies</h3><p>Team training, skills gap analysis, bulk certificate verification, talent pool access, ATS integrations with Greenhouse, Lever, and Workday. Skills Intelligence API.</p><div class="product-price">$299–$699</div><div class="product-price-note">per month</div></div>
     </div>
   </div>
 </div>
@@ -487,37 +659,16 @@
 <section class="pad">
   <div class="wrap">
     <span class="section-tag">Revenue Model</span>
-    <h2 class="h2">Seven streams. Learners fund none of them.</h2>
+    <h2 class="h2">Seven streams.<br>Learners fund none of them.</h2>
     <div class="revenue-layout">
       <div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Schools Subscriptions</div><div class="revenue-detail">$10–$67/month per school — recurring, low churn</div></div>
-          <div class="revenue-val">Primary</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Job Board Listings</div><div class="revenue-detail">$49 standard / $99 featured — 30 days</div></div>
-          <div class="revenue-val">$49–$99</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Pro Subscriptions</div><div class="revenue-detail">Unlimited AI, interview simulator, premium content</div></div>
-          <div class="revenue-val">$5/mo</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Developer Tool Advertising</div><div class="revenue-detail">Highly targeted — developers are the audience</div></div>
-          <div class="revenue-val">$150–$1K</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Companies Product</div><div class="revenue-detail">Team training, skills gaps, ATS integrations</div></div>
-          <div class="revenue-val">$299/mo</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Certificate Verify API</div><div class="revenue-detail">Bulk employer verification, ATS integration</div></div>
-          <div class="revenue-val">$99/mo</div>
-        </div>
-        <div class="revenue-row">
-          <div><div class="revenue-name">Mentor &amp; Freelance Commission</div><div class="revenue-detail">15% on mentor sessions, 10% on freelance projects</div></div>
-          <div class="revenue-val">10–15%</div>
-        </div>
+        <div class="revenue-row"><div><div class="revenue-name">Schools Subscriptions</div><div class="revenue-detail">$10–$67/month per school — recurring, low churn</div></div><div class="revenue-val">Primary</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Job Board Listings</div><div class="revenue-detail">$49 standard / $99 featured — 30 days</div></div><div class="revenue-val">$49–$99</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Pro Subscriptions</div><div class="revenue-detail">Unlimited AI, interview simulator, premium content</div></div><div class="revenue-val">$5/mo</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Developer Tool Advertising</div><div class="revenue-detail">Highly targeted — developers are the audience</div></div><div class="revenue-val">$150–$1K</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Companies Product</div><div class="revenue-detail">Team training, skills gaps, ATS integrations</div></div><div class="revenue-val">$299/mo</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Certificate Verify API</div><div class="revenue-detail">Bulk employer verification, ATS integration</div></div><div class="revenue-val">$99/mo</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Mentor &amp; Freelance Commission</div><div class="revenue-detail">15% on mentor sessions, 10% on freelance</div></div><div class="revenue-val">10–15%</div></div>
       </div>
       <div>
         <div class="projections">
@@ -525,25 +676,172 @@
           <div class="proj-row"><span class="proj-label">Month 3 — 2,000 users</span><span class="proj-val">~$1,830</span></div>
           <div class="proj-row"><span class="proj-label">Month 6 — 8,000 users</span><span class="proj-val">~$7,500</span></div>
           <div class="proj-row"><span class="proj-label">Month 12 — 25,000 users</span><span class="proj-val ac">$25K–$40K/mo</span></div>
-          <div class="proj-row"><span class="proj-label">1M Schools × avg $27/mo</span><span class="proj-val ac">$27M/mo</span></div>
+          <div class="proj-row"><span class="proj-label">10,000 schools target</span><span class="proj-val ac">$270K/mo</span></div>
         </div>
         <div class="schools-note">
-          <p><strong>The schools bet:</strong> 130M+ schools globally. Even 0.01% adoption at avg $27/month = $35M MRR. Schools pay monthly, churn slowly, and refer each other. The product is built for that retention. Funding gets us to the first 1,000 schools.</p>
+          <p><strong>The schools asymmetric bet:</strong> 130M+ schools globally. Even 0.01% adoption at avg $27/mo = $35M MRR. Schools pay monthly, churn slowly, refer each other. This is not a projection — it is a penetration question.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MARKET -->
+<!-- THE ASK -->
+<div class="ask-wrap pad" id="ask">
+  <div class="wrap">
+    <span class="section-tag">The Ask</span>
+    <h2 class="h2">Raising <em>$500,000</em> to reach<br>10,000 schools.</h2>
+    <div class="ask-grid">
+      <div>
+        <div class="ask-hero-num">$500K</div>
+        <p class="ask-sub">Pre-seed round. This is the number that gets us from fully designed to fully launched and to 10,000 paying schools in 12 months.</p>
+        <div class="ask-bridge">
+          <p><strong>First check welcome from $25K.</strong> We are also open to a bridge raise of $100–150K to get to launch and first 500 schools, then raise the full round on traction. Whatever gets us moving fastest is the right structure.</p>
+        </div>
+      </div>
+      <div>
+        <div class="ask-breakdown">
+          <div class="ask-row"><span class="ask-label">AI infrastructure (Claude API at scale)</span><span class="ask-val">$180,000</span></div>
+          <div class="ask-row"><span class="ask-label">Schools sales &amp; outreach</span><span class="ask-val">$80,000</span></div>
+          <div class="ask-row"><span class="ask-label">Team (support + schools sales)</span><span class="ask-val">$70,000</span></div>
+          <div class="ask-row"><span class="ask-label">Founder salary (12 months, lean)</span><span class="ask-val">$50,000</span></div>
+          <div class="ask-row"><span class="ask-label">Legal &amp; compliance (COPPA, GDPR)</span><span class="ask-val">$50,000</span></div>
+          <div class="ask-row"><span class="ask-label">Hosting &amp; infrastructure</span><span class="ask-val">$30,000</span></div>
+          <div class="ask-row"><span class="ask-label">Buffer (20%)</span><span class="ask-val">$40,000</span></div>
+          <div class="ask-row" style="background:rgba(200,245,66,0.06)"><span class="ask-label" style="color:var(--accent);font-weight:700">Total</span><span class="ask-val" style="color:var(--accent);font-weight:800;font-size:.92rem">$500,000</span></div>
+        </div>
+        <div class="ask-return">
+          <h4>Why this returns well</h4>
+          <p><strong>10,000 schools × avg $27/mo = $270,000 MRR</strong> at month 12.</p>
+          <p><strong>$3.24M ARR</strong> by end of year one from schools alone — before job board, companies product, or pro subscriptions.</p>
+          <p>At a conservative <strong>5× revenue multiple</strong> that is a $16.2M valuation on a $500K investment. At 10× (normal SaaS with 85% margins), it is $32.4M.</p>
+        </div>
+      </div>
+    </div>
+    <div class="investors-note">
+      <h4>Who we want to talk to</h4>
+      <p><strong>Angels and micro-VCs</strong> who understand edtech, developer tools, or African/global tech. <strong>Iyin Aboyeji</strong> (Andela, Flutterwave co-founder — built the African developer ecosystem), <strong>Techstars Africa</strong>, <strong>YC</strong>, <strong>Founders Factory Africa</strong>, and any investor who has seen what happens when you remove price as a barrier to education.</p>
+      <p>We are also open to <strong>strategic angels</strong> — ex-educators, school system administrators, developer advocates — who can open doors faster than capital alone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
 <div class="bg-card pad">
   <div class="wrap">
+    <span class="section-tag">Roadmap — What This Money Unlocks</span>
+    <h2 class="h2">4 weeks to V1.<br>12 months to <em>10,000 schools.</em></h2>
+    <div class="roadmap">
+      <div class="roadmap-item"><span class="roadmap-phase">Weeks 1–4</span><div class="roadmap-content"><h4>V1 Launch — The Core</h4><p>Full lesson engine, AI tutor, exam system, blockchain certificates, job board, dashboard, auth, Supabase backend.</p><div class="roadmap-tags"><span>500+ courses</span><span>Exams + certs</span><span>Job board</span><span>AI tutor</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 2–3</span><div class="roadmap-content"><h4>Community + Arena</h4><p>Multiplayer Arena, pair programming Collab, mentor marketplace, forums, study groups, gamification.</p><div class="roadmap-tags"><span>Arena battles</span><span>Pair programming</span><span>Mentors</span><span>Forums</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 3–6</span><div class="roadmap-content"><h4>Schools + Career Layer</h4><p>Schools product launched, interview simulator, cover letter AI, offer analyser, freelance board, companies product.</p><div class="roadmap-tags"><span>Schools live</span><span>Interview sim</span><span>Freelance board</span><span>Cover letter AI</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 6–12</span><div class="roadmap-content"><h4>Scale to 10,000 Schools</h4><p>Active school outreach, reputation API, certificate verify API, VS Code extension, in-browser IDE, first 10K schools target.</p><div class="roadmap-tags"><span>10K schools</span><span>Public API</span><span>In-browser IDE</span><span>VS Code ext</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MARKET -->
+<section class="pad">
+  <div class="wrap">
     <span class="section-tag">Market Size</span>
-    <h2 class="h2">The market is every person on earth who wants to write code.</h2>
-    <div class="grid-1px market-numbers">
+    <h2 class="h2">The market is every person on earth<br>who wants to write code.</h2>
+    <div class="grid-line market-numbers">
       <div class="market-number"><span class="big ac">$26B</span><span class="desc">Global online coding education market — growing 12% annually</span></div>
-      <div class="market-number"><span class="big">130M+</span><span class="desc">Schools worldwide — each one a potential Getintotech Schools customer</span></div>
+      <div class="market-number"><span class="big">130M+</span><span class="desc">Schools worldwide — each one a potential Getintotech Schools customer at $10–$67/mo</span></div>
       <div class="market-number"><span class="big ac">100M+</span><span class="desc">People actively learning to code — underserved by every existing free platform</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CROWDFUNDING -->
+<div class="bg-accent-faint pad" id="fund">
+  <div class="wrap">
+    <div class="crowd-inner">
+      <span class="section-tag">Support the Build</span>
+      <h2>Help us build <em>free</em> developer education for everyone.</h2>
+      <p class="body-p">Not an investor? You can still be part of this. Every contribution funds the build and gets us to launch faster. We are not asking learners to pay — we are asking people who believe in this mission to back it.</p>
+
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-amount">Any amount</div>
+          <div class="tier-name">Supporter</div>
+          <p>Your name in the founding supporters list on the platform. You believed before anyone else did.</p>
+        </div>
+        <div class="tier featured">
+          <div class="tier-amount">$50+</div>
+          <div class="tier-name">Founding Member</div>
+          <p>Name in supporters list + Founding Member badge on profile + 6 months of Pro features free at launch.</p>
+        </div>
+        <div class="tier">
+          <div class="tier-amount">$200+</div>
+          <div class="tier-name">Co-Builder</div>
+          <p>Everything above + 12 months Pro at launch + monthly personal update from the founder until we ship.</p>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <span class="progress-raised" id="raised-amount">$0 raised</span>
+          <span class="progress-goal">Goal: $50,000</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-meta">
+          <span>Crowdfunding open now</span>
+          <span>getintotech.vercel.app</span>
+        </div>
+      </div>
+
+      <div class="crowd-cta">
+        <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="crowd-main-btn">❤️ Support Getintotech</a>
+        <span class="crowd-note">Powered by Flutterwave · Cards, bank transfer, mobile money</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE HAVE BUILT -->
+<section class="pad">
+  <div class="wrap">
+    <span class="section-tag">Where We Are</span>
+    <h2 class="h2">The platform is fully designed.<br>We are raising to <em>run it.</em></h2>
+    <div class="ready-grid">
+      <div class="ready-col">
+        <h3>What is already <em>done</em></h3>
+        <div class="ready-list">
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>164-section master specification</h5><p>10,500+ lines. Every feature, edge case, revenue stream, legal consideration, and growth strategy documented before a line of code.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Complete design system</h5><p>Full CSS token system, component library, every page layout, all responsive breakpoints. Drop it into code and it works.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>500+ courses fully configured</h5><p>Course metadata, career tracks, lesson sequences, exam configurations, difficulty levels. Not a list — a production-ready dataset.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Business model validated</h5><p>Schools pricing confirmed through direct conversations with school administrators. Revenue model stress-tested across 7 streams.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>800-task build plan</h5><p>Day-by-day order. Every dependency mapped. V1 ships in exactly 4 weeks from first line of code. No guessing. No planning debt.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>22 unique features designed</h5><p>Not ideas — fully specified. Architecture chosen. Data models sketched. Edge cases solved. These are ready to build, not ready to explore.</p></div></div>
+        </div>
+      </div>
+      <div class="ready-col">
+        <h3>What is <em>left</em></h3>
+        <div class="ready-what-left">
+          <h4>Running code. That is it.</h4>
+          <p>Most pre-seed startups raise to figure out what to build. We are raising to execute what is already designed. The difference matters enormously.</p>
+          <p><strong>When you fund most pre-seed startups:</strong> They spend 6 months figuring out the product, 6 months building it, then launch with something half-baked and iterate.</p>
+          <p><strong>When you fund Getintotech:</strong> Week 1 we write code. Week 4 we launch V1. Month 3 we have schools. Month 12 we have 10,000 schools.</p>
+          <p><strong>The risk is not "will they figure it out." The risk is "will they execute." And the founder has 7+ years of production engineering to answer that.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<div class="bg-card pad">
+  <div class="wrap">
+    <span class="section-tag">Risks — And How We Think About Them</span>
+    <h2 class="h2">We know the risks.<br>We have thought through them.</h2>
+    <div class="risks-grid">
+      <div class="risk-card"><span class="risk-label">Risk 01</span><h4>AI API cost at scale</h4><p>Claude API is our biggest cost. At 100K active users doing 10 messages/day, that is ~$15,000/mo. <strong>Mitigation:</strong> Pro subscription caps AI usage. Free tier has a daily message limit. Schools AI usage is billed into the subscription. We model this carefully before every pricing decision.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 02</span><h4>Exam integrity</h4><p>What if someone finds a way to cheat? <strong>Mitigation:</strong> Unique test cases per attempt make sharing useless. Tab-switching tracking. Employer-requested webcam proctoring. Certificate links to a live blockchain record. The whole system is designed around this.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 03</span><h4>Larger platforms copying features</h4><p>What if Coursera or Udemy copies us? <strong>Mitigation:</strong> They cannot ship free. Their entire business model is charging learners. Flipping to free would destroy their revenue. We are structurally protected by being the only platform whose incentives are fully aligned with learners.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 04</span><h4>COPPA compliance (children's data)</h4><p>Schools means children under 13. COPPA violations are serious. <strong>Mitigation:</strong> $50K of the raise is earmarked for legal and compliance. COPPA-compliant data handling is designed into the schools product from the start, not retrofitted later.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 05</span><h4>School sales cycle is long</h4><p>Schools can take 6–12 months to make purchasing decisions. <strong>Mitigation:</strong> We target individual teachers first — they sign up schools. Teacher adoption converts to school contracts. We also target private schools, coding academies, and bootcamps with faster decision cycles first.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 06</span><h4>Solo founder execution risk</h4><p>What if the founder burns out or gets stuck? <strong>Mitigation:</strong> The 164-section spec means no decision paralysis. Every engineering choice is already made. The build plan is 800 specific tasks. This is execution, not exploration. And funding means the founder can hire before it becomes a single point of failure.</p></div>
     </div>
   </div>
 </div>
@@ -558,13 +856,13 @@
     <div>
       <div class="founder-bio">
         <h3>Olamilekan Akinuli</h3>
-        <span class="founder-role">Founder &amp; Solo Builder — lekanakinuli@gmail.com</span>
+        <span class="founder-role">Founder &amp; Builder — lekanakinuli@gmail.com</span>
         <p>7+ year software engineer who started learning in high school and experienced the broken developer education system firsthand. Not a first-time builder searching for a problem — an engineer who lived the problem for years and decided to fix it permanently.</p>
-        <p>Building Getintotech solo: the 164-section specification, every design decision, every line of code. The same person who felt the problem is the person building the solution.</p>
+        <p>Building Getintotech solo: the 164-section specification, every design decision, every line of code. The same person who felt the problem is the person who has already designed the solution in full.</p>
       </div>
       <div class="founder-stats">
-        <div class="founder-stat"><span class="val">7+</span><span class="lbl">years as software engineer</span></div>
-        <div class="founder-stat"><span class="val">164</span><span class="lbl">spec sections written</span></div>
+        <div class="founder-stat"><span class="val">7+</span><span class="lbl">years engineering</span></div>
+        <div class="founder-stat"><span class="val">164</span><span class="lbl">spec sections</span></div>
         <div class="founder-stat"><span class="val">500+</span><span class="lbl">courses designed</span></div>
         <div class="founder-stat"><span class="val">Solo</span><span class="lbl">building everything</span></div>
       </div>
@@ -572,36 +870,40 @@
   </div>
 </section>
 
-<!-- WHERE WE ARE -->
-<div class="bg-card pad">
-  <div class="wrap">
-    <span class="section-tag">Where We Are</span>
-    <h2 class="h2">Pre-product. Deep preparation. Shipping in 4 weeks.</h2>
-    <div class="grid-1px status-grid">
-      <div class="status-item">
-        <span class="status-icon">📋</span>
-        <h4>Complete Specification</h4>
-        <p>164 sections, 10,500+ lines. Every feature, edge case, and revenue stream documented before a single line of code.</p>
+<!-- FAQ -->
+<div class="bg-card2 pad" id="faq">
+  <div class="wrap" style="max-width:800px">
+    <span class="section-tag">FAQ</span>
+    <h2 class="h2">The questions investors<br>always ask.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Why will it always be free for learners? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Because charging learners is the wrong business model. The people who most need better credentials are the least able to pay for them. Revenue comes from schools, companies, job listings, and employers — the people who benefit from a trained workforce. Learners never pay. That is not a strategy. It is a commitment.</div>
       </div>
-      <div class="status-item">
-        <span class="status-icon">🎨</span>
-        <h4>Design System Done</h4>
-        <p>Full CSS system, component library, all page styles. 500+ courses configured with metadata and career tracks.</p>
+      <div class="faq-item">
+        <button class="faq-q">How do you stop people cheating on the exams? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Unique test cases generated for every attempt. There is nothing to Google because the inputs are different every time. Tab-switching is tracked. Webcam proctoring available for employer-requested verification. The certificate links to a live blockchain record — any employer can verify it was earned by a real person in real time.</div>
       </div>
-      <div class="status-item">
-        <span class="status-icon">🏫</span>
-        <h4>Schools Validated</h4>
-        <p>Schools product concept validated through direct conversations. $10/month confirmed as accessible globally.</p>
+      <div class="faq-item">
+        <button class="faq-q">Why hasn't this been built already? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Most edtech companies are built to extract money from learners. Subscriptions, paid certificates, course bundles — the incentive is to maximise revenue from the audience. We flipped it. Revenue comes from employers and schools. That model is harder to build but creates a genuinely aligned product. Nobody has done it at this scope because the easier path was always to charge learners.</div>
       </div>
-      <div class="status-item">
-        <span class="status-icon">🚀</span>
-        <h4>4-Week Build Plan</h4>
-        <p>Day-by-day build order documented. V1 launches 4 weeks from first line of code. 800+ tasks tracked.</p>
+      <div class="faq-item">
+        <button class="faq-q">Is $500K pre-seed too much to raise? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">The number is justified line by line — see the breakdown above. The AI API cost alone at scale is $180K/year. COPPA compliance for a children's platform is non-negotiable and expensive. Schools sales outreach is not free. We are also open to a bridge raise of $100–150K to get to launch and first 500 schools, then return for the full round with traction. First check can be from $25K.</div>
       </div>
-    </div>
-    <div class="honest-box">
-      <span class="honest-label">Honest</span>
-      <p>No live product. No paying customers. No users yet. What we have is an unusually complete specification, a founder with 7+ years of production engineering, a problem that affects 100 million people, and a business model that does not require charging the people we are trying to help. We are raising pre-seed to build and launch.</p>
+      <div class="faq-item">
+        <button class="faq-q">What does my donation actually fund? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Infrastructure during build (Supabase, Vercel, Claude API), the blockchain certificate system, worked example video production, and runway to reach the first schools. Every pound and dollar goes directly into the product. The founder is not drawing a salary until revenue starts.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What happens to certificates if Getintotech shuts down? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">Every certificate hash is stored permanently on the Polygon blockchain. The verification logic will be open-sourced so any employer can verify certificates even with no platform running. Learners can export all their data at any time. We are designing for permanence, not dependency.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Why should schools trust a platform that hasn't launched? <span class="faq-arrow">+</span></button>
+        <div class="faq-a">They should not — yet. We are targeting early-adopter schools and individual teachers who are willing to test new tools. Their feedback shapes V1. Schools with formal procurement processes come later when we have case studies. This is standard go-to-market for any new edtech product.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -609,16 +911,50 @@
 <!-- CTA -->
 <div class="cta-wrap">
   <h2>Let's build this together.</h2>
-  <p>Pre-seed round open. If you believe developer education should be free and credentials should mean something, we want to talk.</p>
-  <a href="mailto:lekanakinuli@gmail.com" class="btn-dark">lekanakinuli@gmail.com</a>
+  <p>Pre-seed round open. Crowdfunding live. If you believe developer education should be free and credentials should mean something — we need you.</p>
+  <div class="cta-buttons">
+    <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="btn-dark">❤️ Support the Build</a>
+    <a href="mailto:lekanakinuli@gmail.com" class="btn-dark-outline">Talk to the Founder</a>
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <a href="#" class="logo">get<span style="color:var(--accent)">into</span>tech</a>
   <p>© 2025 Getintotech. Free developer education. Real credentials.</p>
-  <p>lekanakinuli@gmail.com</p>
+  <p>lekanakinuli@gmail.com · <a href="https://getintotech.vercel.app" style="color:var(--muted);text-decoration:none">getintotech.vercel.app</a></p>
 </footer>
 
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Progress bar
+let animated = false;
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !animated) {
+    animated = true;
+    document.getElementById('progress-fill').style.width = '0%';
+    document.getElementById('raised-amount').textContent = '$0 raised';
+  }
+}, { threshold: 0.3 });
+const fundEl = document.getElementById('fund');
+if (fundEl) observer.observe(fundEl);
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
 </body>
 </html>
