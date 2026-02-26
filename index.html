@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getintotech — Free Developer Education. Real Credentials.</title>
-<meta name="description" content="500+ free courses, AI tutor, proctored exams, blockchain certificates. The complete developer career platform — free for every learner on earth.">
-<meta property="og:title" content="Getintotech — Free Developer Education. Real Credentials.">
-<meta property="og:description" content="Help us build the world's first completely free developer career platform.">
+<title>Getintotech — Free Tech Education. Real Credentials.</title>
+<meta name="description" content="500+ free courses across the entire tech industry. AI tutor, proctored exams, blockchain certificates. Free for every learner on earth.">
+<meta property="og:title" content="Getintotech — Free Tech Education. Real Credentials.">
+<meta property="og:description" content="Help us build the world's first completely free tech career platform.">
 <meta property="og:url" content="https://getintotech.vercel.app">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,23 +23,66 @@ body{background:var(--black);color:var(--white);font-family:'Syne',sans-serif;ov
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 1.1rem;gap:.75rem;
+  padding:.85rem 1.1rem;gap:.6rem;
   border-bottom:1px solid var(--border);
-  background:rgba(10,10,10,0.93);backdrop-filter:blur(14px);
+  background:rgba(10,10,10,0.95);backdrop-filter:blur(14px);
+  min-height:56px;
 }
 .logo{font-size:.95rem;font-weight:800;letter-spacing:-.02em;color:var(--white);text-decoration:none;white-space:nowrap;flex-shrink:0}
 .logo span{color:var(--accent)}
-.nav-links{display:none;align-items:center;gap:1.25rem}
+
+/* desktop links - hidden on mobile */
+.nav-links{display:none;align-items:center;gap:1.25rem;flex:1;justify-content:center}
 .nav-links a{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);text-decoration:none;transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--white)}
-.nav-cta{
+
+/* desktop CTA - hidden on mobile */
+.nav-cta-desk{
+  display:none;
   background:var(--accent);color:var(--black);
   font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;
   padding:.5rem 1rem;text-decoration:none;transition:opacity .2s;white-space:nowrap;flex-shrink:0
 }
-.nav-cta:hover{opacity:.82}
-@media(min-width:640px){nav{padding:1.1rem 2rem}.nav-links{display:flex}.nav-cta{font-size:.8rem;padding:.55rem 1.2rem}}
-@media(min-width:900px){nav{padding:1.25rem 2.5rem}}
+.nav-cta-desk:hover{opacity:.82}
+
+/* hamburger - visible on mobile only */
+.hamburger{
+  display:flex;flex-direction:column;justify-content:center;gap:4.5px;
+  background:none;border:none;cursor:pointer;padding:.4rem;flex-shrink:0;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .28s ease}
+.hamburger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* mobile drawer */
+.mobile-menu{
+  position:fixed;top:56px;left:0;right:0;bottom:0;z-index:190;
+  background:rgba(10,10,10,0.98);backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+  opacity:0;pointer-events:none;transition:opacity .28s ease;
+  padding:2rem;
+}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{
+  font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;
+  color:var(--white);text-decoration:none;letter-spacing:-.02em;transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-menu .mob-cta{
+  margin-top:.5rem;
+  background:var(--accent);color:var(--black);
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;
+  padding:.9rem 2.5rem;text-decoration:none;
+}
+
+@media(min-width:640px){
+  nav{padding:1rem 2rem;min-height:60px}
+  .nav-links{display:flex}
+  .nav-cta-desk{display:block}
+  .hamburger{display:none}
+}
+@media(min-width:900px){nav{padding:1.1rem 2.5rem}}
 
 /* ── SHARED ── */
 .wrap{max-width:1200px;margin:0 auto}
@@ -57,7 +100,6 @@ nav{
 .btn-accent:hover{opacity:.82}
 .btn-outline{display:inline-block;border:1px solid rgba(245,243,238,0.2);color:var(--white);font-family:'DM Mono',monospace;font-size:.75rem;padding:.75rem 1.4rem;text-decoration:none;transition:all .2s}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.mono{font-family:'DM Mono',monospace}
 
 @media(min-width:640px){.pad{padding:4.5rem 2rem}.pad-lg{padding:5.5rem 2rem}}
 @media(min-width:900px){.pad{padding:5.5rem 2.5rem}.pad-lg{padding:6.5rem 2.5rem}}
@@ -65,27 +107,18 @@ nav{
 /* ── HERO ── */
 .hero{
   min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:6.5rem 1.1rem 3.5rem;position:relative;overflow:hidden
+  padding:6rem 1.1rem 3.5rem;position:relative;overflow:hidden
 }
-.hero::before{
-  content:'';position:absolute;top:-10%;right:-5%;
-  width:min(600px,90vw);height:min(600px,90vw);
-  background:radial-gradient(circle,rgba(200,245,66,0.07) 0%,transparent 65%);pointer-events:none
-}
-.hero::after{
-  content:'';position:absolute;bottom:5%;left:-10%;
-  width:min(400px,60vw);height:min(400px,60vw);
-  background:radial-gradient(circle,rgba(200,245,66,0.03) 0%,transparent 65%);pointer-events:none
-}
-.eyebrow{
-  font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);
-  letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;
-  display:flex;align-items:center;gap:.65rem
-}
+.hero::before{content:'';position:absolute;top:-10%;right:-5%;width:min(600px,90vw);height:min(600px,90vw);background:radial-gradient(circle,rgba(200,245,66,0.07) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:5%;left:-10%;width:min(400px,60vw);height:min(400px,60vw);background:radial-gradient(circle,rgba(200,245,66,0.03) 0%,transparent 65%);pointer-events:none}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.65rem}
 .eyebrow::before{content:'';display:inline-block;width:1.5rem;height:1px;background:var(--accent)}
 .hero h1{font-size:clamp(2.4rem,9.5vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-.045em;margin-bottom:1.5rem}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero-sub{font-family:'DM Mono',monospace;font-size:clamp(.82rem,2.2vw,.98rem);font-weight:300;color:var(--muted);max-width:480px;line-height:1.8;margin-bottom:2.25rem}
+.hero-sub{font-family:'DM Mono',monospace;font-size:clamp(.82rem,2.2vw,.98rem);font-weight:300;color:var(--muted);max-width:500px;line-height:1.8;margin-bottom:1.5rem}
+/* tech pills */
+.tech-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:2.25rem}
+.tech-pill{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--accent);border:1px solid rgba(200,245,66,0.25);padding:.28rem .65rem;background:rgba(200,245,66,0.05)}
 .hero-actions{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
 .btn-ghost{color:var(--white);font-family:'DM Mono',monospace;font-size:.78rem;text-decoration:none;opacity:.45;transition:opacity .2s}
 .btn-ghost:hover{opacity:1}
@@ -93,16 +126,8 @@ nav{
 @media(min-width:900px){.hero{padding:8rem 2.5rem 5rem}}
 
 /* ── BUILDING BANNER ── */
-.building-banner{
-  background:rgba(200,245,66,0.05);
-  border-top:1px solid rgba(200,245,66,0.18);border-bottom:1px solid rgba(200,245,66,0.18);
-  padding:.9rem 1.1rem;display:flex;align-items:flex-start;gap:.85rem;flex-wrap:wrap
-}
-.banner-tag{
-  font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);background:rgba(200,245,66,0.1);padding:.25rem .6rem;
-  white-space:nowrap;flex-shrink:0;margin-top:.1rem
-}
+.building-banner{background:rgba(200,245,66,0.05);border-top:1px solid rgba(200,245,66,0.18);border-bottom:1px solid rgba(200,245,66,0.18);padding:.9rem 1.1rem;display:flex;align-items:flex-start;gap:.85rem;flex-wrap:wrap}
+.banner-tag{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:rgba(200,245,66,0.1);padding:.25rem .6rem;white-space:nowrap;flex-shrink:0;margin-top:.1rem}
 .building-banner p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.65}
 @media(min-width:640px){.building-banner{padding:1.1rem 2rem}}
 @media(min-width:900px){.building-banner{padding:1.25rem 2.5rem}}
@@ -129,11 +154,7 @@ nav{
 .how-num{font-size:2.25rem;font-weight:800;letter-spacing:-.04em;color:var(--accent);opacity:.22;flex-shrink:0;line-height:1;margin-top:-.15rem}
 .how-step h3{font-size:.95rem;font-weight:700;margin-bottom:.45rem;letter-spacing:-.01em}
 .how-step p{font-family:'DM Mono',monospace;font-size:.73rem;color:var(--muted);line-height:1.72}
-@media(min-width:640px){
-  .how-grid{grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-  .how-step{flex-direction:column;border-bottom:none}
-  .how-num{font-size:3rem}
-}
+@media(min-width:640px){.how-grid{grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}.how-step{flex-direction:column;border-bottom:none}.how-num{font-size:3rem}}
 
 /* ── WHY NOW ── */
 .why-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
@@ -143,15 +164,20 @@ nav{
 .why-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.72}
 @media(min-width:480px){.why-grid{grid-template-columns:repeat(2,1fr)}}
 
+/* ── TECH CATEGORIES ── */
+.tech-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:2.5rem}
+.tech-cat{background:var(--black);padding:1.5rem;display:flex;gap:.85rem;align-items:flex-start}
+.tech-cat-icon{font-size:1.2rem;flex-shrink:0}
+.tech-cat h4{font-size:.85rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.01em}
+.tech-cat p{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);line-height:1.65}
+@media(min-width:480px){.tech-cats{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.tech-cats{grid-template-columns:repeat(4,1fr)}}
+
 /* ── FEATURES ── */
 .features-header{display:grid;grid-template-columns:1fr;gap:1.75rem;margin-bottom:2.5rem}
 .features-grid{grid-template-columns:1fr}
 .feature-card{background:var(--black);padding:1.75rem;position:relative}
-.feature-card.u::after{
-  content:'UNIQUE';position:absolute;top:.9rem;right:.9rem;
-  font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.1em;
-  color:var(--accent);background:rgba(200,245,66,0.09);padding:.2rem .45rem
-}
+.feature-card.u::after{content:'UNIQUE';position:absolute;top:.9rem;right:.9rem;font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.1em;color:var(--accent);background:rgba(200,245,66,0.09);padding:.2rem .45rem}
 .feature-emoji{font-size:1.3rem;margin-bottom:.8rem;display:block}
 .feature-card h4{font-size:.88rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
 .feature-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.7}
@@ -159,14 +185,26 @@ nav{
 @media(min-width:860px){.features-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:768px){.features-header{grid-template-columns:1fr 1fr;gap:4rem;align-items:end}}
 
+/* ── SCHOOL ONBOARDING ── */
+.onboard-layout{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-top:2.5rem}
+.onboard-steps{display:flex;flex-direction:column;gap:0}
+.onboard-step{display:flex;gap:1rem;padding:1.35rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.onboard-step:first-child{border-top:1px solid var(--border)}
+.onboard-step-num{width:1.75rem;height:1.75rem;background:var(--accent);color:var(--black);font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.onboard-step h5{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+.onboard-step p{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);line-height:1.68}
+.onboard-card{background:var(--card);border:1px solid var(--border);padding:1.75rem}
+.onboard-card-title{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.onboard-stat-row{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.onboard-stat-row:last-child{border-bottom:none}
+.onboard-stat-row span:first-child{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.onboard-stat-row span:last-child{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--accent);font-weight:500}
+@media(min-width:640px){.onboard-layout{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
+
 /* ── CERT ── */
 .cert-section{display:grid;grid-template-columns:1fr;gap:2.5rem}
 .cert-mockup{background:var(--card);border:1px solid var(--border);padding:1.75rem;position:relative}
-.cert-mockup::before{
-  content:'BLOCKCHAIN VERIFIED';position:absolute;top:.9rem;right:.9rem;
-  font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;
-  color:var(--accent);background:rgba(200,245,66,0.09);padding:.25rem .55rem
-}
+.cert-mockup::before{content:'BLOCKCHAIN VERIFIED';position:absolute;top:.9rem;right:.9rem;font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:var(--accent);background:rgba(200,245,66,0.09);padding:.25rem .55rem}
 .cert-mockup-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.1rem}
 .cert-name{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.2rem}
 .cert-course{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1.25rem}
@@ -183,21 +221,13 @@ nav{
 /* ── COMPARISON ── */
 .comparison-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);margin-top:2.5rem}
 .comparison-table{width:100%;border-collapse:collapse;min-width:520px}
-.comparison-table th{
-  font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
-  padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card);white-space:nowrap
-}
+.comparison-table th{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card);white-space:nowrap}
 .comparison-table th.us{color:var(--accent)}
-.comparison-table td{
-  padding:.78rem 1rem;border-bottom:1px solid var(--border);
-  font-family:'DM Mono',monospace;color:var(--muted);font-size:.68rem;vertical-align:middle
-}
+.comparison-table td{padding:.78rem 1rem;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;color:var(--muted);font-size:.68rem;vertical-align:middle}
 .comparison-table td:first-child{color:var(--white);font-size:.74rem;font-family:'Syne',sans-serif;font-weight:600;white-space:nowrap}
 .comparison-table tr:last-child td{border-bottom:none}
 .comparison-table tr:hover td{background:rgba(245,243,238,0.015)}
-.tick{color:var(--accent)}
-.cross{color:#444}
-.partial{color:#b8943a;font-size:.65rem}
+.tick{color:var(--accent)}.cross{color:#444}.partial{color:#b8943a;font-size:.65rem}
 
 /* ── MOAT ── */
 .moat-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
@@ -212,12 +242,12 @@ nav{
 .unit-table{width:100%;border-collapse:collapse}
 .unit-table tr{border-bottom:1px solid var(--border)}
 .unit-table tr:first-child{border-top:1px solid var(--border)}
-.unit-table td{padding:.9rem 0;font-family:'DM Mono',monospace;font-size:.76rem;vertical-align:top}
+.unit-table td{padding:.9rem 0;font-family:'DM Mono',monospace;font-size:.75rem;vertical-align:top}
 .unit-table td:first-child{color:var(--muted);width:60%}
 .unit-table td:last-child{color:var(--white);font-weight:500;text-align:right}
-.unit-table td.accent{color:var(--accent);font-weight:700}
+.unit-table td.ac{color:var(--accent);font-weight:700}
 .unit-highlight{background:rgba(200,245,66,0.05);border:1px solid rgba(200,245,66,0.15);padding:1.5rem;margin-top:1.5rem}
-.unit-highlight p{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--muted);line-height:1.8}
+.unit-highlight p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.8}
 .unit-highlight strong{color:var(--white);font-weight:500}
 @media(min-width:640px){.unit-layout{grid-template-columns:1fr 1fr}}
 
@@ -251,20 +281,26 @@ nav{
 
 /* ── ASK ── */
 .ask-wrap{background:#0d0d0d;border-top:1px solid rgba(200,245,66,0.2);border-bottom:1px solid rgba(200,245,66,0.2)}
-.ask-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2.5rem}
-.ask-hero-num{font-size:clamp(3rem,10vw,5.5rem);font-weight:800;letter-spacing:-.05em;color:var(--accent);line-height:1;margin-bottom:.35rem}
+.ask-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-top:2.5rem}
+.ask-range{font-size:clamp(2rem,8vw,4.5rem);font-weight:800;letter-spacing:-.05em;color:var(--accent);line-height:1;margin-bottom:.35rem}
 .ask-sub{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem}
+.ask-tiers{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-bottom:1.5rem}
+.ask-tier{background:var(--card2);padding:1.1rem 1.35rem;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
+.ask-tier.highlight{background:rgba(200,245,66,0.06)}
+.ask-tier-label{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
+.ask-tier-label strong{color:var(--white);font-weight:500;display:block;margin-bottom:.15rem;font-size:.78rem}
+.ask-tier-val{font-family:'DM Mono',monospace;font-size:.82rem;color:var(--accent);white-space:nowrap;flex-shrink:0}
 .ask-breakdown{display:flex;flex-direction:column;gap:1px;background:var(--border)}
 .ask-row{background:var(--card2);padding:1rem 1.35rem;display:flex;justify-content:space-between;align-items:center;gap:.75rem}
-.ask-label{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted)}
-.ask-val{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--white);white-space:nowrap;flex-shrink:0}
+.ask-label{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted)}
+.ask-val{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--white);white-space:nowrap;flex-shrink:0}
 .ask-return{background:rgba(200,245,66,0.06);border:1px solid rgba(200,245,66,0.18);padding:1.5rem;margin-top:1.5rem}
 .ask-return h4{font-size:.92rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
 .ask-return p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.78;margin-bottom:.5rem}
 .ask-return p strong{color:var(--white);font-weight:500}
-.ask-bridge{background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.12);padding:1.35rem;margin-top:1rem}
-.ask-bridge p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.75}
-.ask-bridge strong{color:var(--accent);font-weight:500}
+.ask-note{background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.12);padding:1.25rem;margin-top:1rem}
+.ask-note p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.75}
+.ask-note strong{color:var(--accent);font-weight:500}
 @media(min-width:640px){.ask-grid{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
 
 /* ── ROADMAP ── */
@@ -287,22 +323,22 @@ nav{
 
 /* ── READY ── */
 .ready-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:2.5rem}
-.ready-col h3{font-size:clamp(1.35rem,3vw,2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1.25rem;line-height:1.15}
+.ready-col h3{font-size:clamp(1.25rem,3vw,1.85rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1.25rem;line-height:1.15}
 .ready-col h3 em{font-style:normal;color:var(--accent)}
-.ready-list{display:flex;flex-direction:column;gap:0}
+.ready-list{display:flex;flex-direction:column}
 .ready-item{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 0;border-bottom:1px solid var(--border)}
 .ready-item:first-child{border-top:1px solid var(--border)}
 .ready-check{color:var(--accent);font-size:1rem;flex-shrink:0;margin-top:.05rem}
 .ready-item-text h5{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
 .ready-item-text p{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);line-height:1.65}
-.ready-what-left{background:rgba(200,245,66,0.05);border:1px solid rgba(200,245,66,0.18);padding:1.5rem;margin-top:0}
+.ready-what-left{background:rgba(200,245,66,0.05);border:1px solid rgba(200,245,66,0.18);padding:1.5rem}
 .ready-what-left h4{font-size:.9rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
 .ready-what-left p{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.78;margin-bottom:.5rem}
 .ready-what-left p:last-child{margin-bottom:0}
 .ready-what-left strong{color:var(--white);font-weight:500}
 @media(min-width:640px){.ready-grid{grid-template-columns:1fr 1fr;gap:4rem;align-items:start}}
 
-/* ── CROWDFUNDING ── */
+/* ── CROWD ── */
 .crowd-inner{max-width:820px;margin:0 auto;text-align:center}
 .crowd-inner h2{font-size:clamp(1.65rem,5.5vw,3rem);font-weight:800;letter-spacing:-.035em;line-height:1.07;margin-bottom:1.1rem}
 .crowd-inner h2 em{font-style:normal;color:var(--accent)}
@@ -323,12 +359,7 @@ nav{
 .progress-meta{display:flex;justify-content:space-between;margin-top:.55rem;flex-wrap:wrap;gap:.35rem}
 .progress-meta span{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted)}
 .crowd-cta{display:flex;flex-direction:column;gap:.85rem;align-items:center}
-.crowd-main-btn{
-  display:inline-flex;align-items:center;gap:.65rem;
-  background:var(--accent);color:var(--black);
-  font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;
-  padding:1rem 2.25rem;text-decoration:none;transition:opacity .2s
-}
+.crowd-main-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--accent);color:var(--black);font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;padding:1rem 2.25rem;text-decoration:none;transition:opacity .2s}
 .crowd-main-btn:hover{opacity:.85}
 .crowd-note{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 @media(min-width:480px){.crowd-cta{flex-direction:row;justify-content:center}}
@@ -336,7 +367,7 @@ nav{
 /* ── RISKS ── */
 .risks-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border);margin-top:2.5rem}
 .risk-card{background:var(--black);padding:1.75rem}
-.risk-card .risk-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#b8943a;margin-bottom:.75rem;display:block}
+.risk-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#b8943a;margin-bottom:.75rem;display:block}
 .risk-card h4{font-size:.9rem;font-weight:700;margin-bottom:.5rem}
 .risk-card p{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);line-height:1.75}
 .risk-card p strong{color:var(--white);font-weight:500}
@@ -350,6 +381,7 @@ nav{
 .founder-bio h3{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.3rem}
 .founder-role{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.06em;margin-bottom:1.1rem;display:block}
 .founder-bio p{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--muted);line-height:1.82;margin-bottom:.7rem}
+.founder-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.5rem}
 .founder-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:1.75rem}
 .founder-stat{background:var(--card);padding:1.1rem}
 .founder-stat .val{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--accent);display:block}
@@ -360,24 +392,11 @@ nav{
 .faq-list{margin-top:2.5rem;display:flex;flex-direction:column}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-item:first-child{border-top:1px solid var(--border)}
-.faq-q{
-  display:flex;justify-content:space-between;align-items:center;gap:.85rem;
-  padding:1.1rem 0;cursor:pointer;user-select:none;
-  font-size:.9rem;font-weight:700;letter-spacing:-.01em;
-  background:none;border:none;color:var(--white);text-align:left;width:100%;
-  font-family:'Syne',sans-serif;line-height:1.3
-}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:.85rem;padding:1.1rem 0;cursor:pointer;user-select:none;font-size:.88rem;font-weight:700;letter-spacing:-.01em;background:none;border:none;color:var(--white);text-align:left;width:100%;font-family:'Syne',sans-serif;line-height:1.3}
 .faq-arrow{color:var(--accent);font-size:1.1rem;transition:transform .25s;flex-shrink:0}
 .faq-item.open .faq-arrow{transform:rotate(45deg)}
 .faq-a{font-family:'DM Mono',monospace;font-size:.77rem;color:var(--muted);line-height:1.82;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0}
 .faq-item.open .faq-a{max-height:400px;padding-bottom:1.1rem}
-
-/* ── INVESTORS NOTE ── */
-.investors-note{background:rgba(200,245,66,0.04);border:1px solid rgba(200,245,66,0.18);padding:1.75rem;margin-top:2.5rem}
-.investors-note h4{font-size:.92rem;font-weight:700;margin-bottom:.75rem;color:var(--accent)}
-.investors-note p{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);line-height:1.8;margin-bottom:.5rem}
-.investors-note p:last-child{margin-bottom:0}
-.investors-note strong{color:var(--white);font-weight:500}
 
 /* ── CTA ── */
 .cta-wrap{background:var(--accent);padding:4.5rem 1.1rem;text-align:center}
@@ -386,8 +405,8 @@ nav{
 .cta-buttons{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap}
 .btn-dark{display:inline-block;background:var(--black);color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;padding:.9rem 1.75rem;text-decoration:none;transition:opacity .2s}
 .btn-dark:hover{opacity:.85}
-.btn-dark-outline{display:inline-block;border:1.5px solid rgba(10,10,10,0.3);color:var(--black);font-family:'DM Mono',monospace;font-size:.75rem;padding:.85rem 1.5rem;text-decoration:none;transition:opacity .2s}
-.btn-dark-outline:hover{opacity:.65}
+.btn-dark2{display:inline-block;border:1.5px solid rgba(10,10,10,0.3);color:var(--black);font-family:'DM Mono',monospace;font-size:.75rem;padding:.85rem 1.5rem;text-decoration:none;transition:opacity .2s}
+.btn-dark2:hover{opacity:.65}
 @media(min-width:640px){.cta-wrap{padding:5.5rem 2rem}}
 @media(min-width:900px){.cta-wrap{padding:6.5rem 2.5rem}}
 
@@ -396,7 +415,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 1.1rem;display:flex;fl
 footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 @media(min-width:640px){footer{flex-direction:row;align-items:center;justify-content:space-between;padding:2rem 2.5rem}}
 
-/* ── ANIMATIONS ── */
+/* ── ANIMS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .hero .eyebrow{animation:fadeUp .5s ease forwards}
 .hero h1{animation:fadeUp .6s .06s ease both}
@@ -410,20 +429,46 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <nav>
   <a href="#" class="logo">get<span>into</span>tech</a>
   <div class="nav-links">
+    <a href="#tech">What We Cover</a>
     <a href="#features">Features</a>
-    <a href="#ask">The Ask</a>
-    <a href="#fund">Support</a>
+    <a href="#ask">Invest</a>
+    <a href="#fund">Donate</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="nav-cta">Donate ↗</a>
+  <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="nav-cta-desk">Donate ↗</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#tech" class="mob-link">What We Cover</a>
+  <a href="#features" class="mob-link">Features</a>
+  <a href="#ask" class="mob-link">Invest</a>
+  <a href="#fund" class="mob-link">Donate</a>
+  <a href="#faq" class="mob-link">FAQ</a>
+  <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="mob-cta">❤️ Support the Build</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Pre-Seed · Open for Investment &amp; Supporters</p>
-    <h1>Every developer<br>deserves a <em>credential</em><br>they can prove.</h1>
-    <p class="hero-sub">500+ free courses. AI tutor. Proctored exams. Blockchain-verified certificates employers actually trust — at zero cost to learners, forever.</p>
+    <p class="eyebrow">Pre-Seed · Seeking Investment &amp; Supporters</p>
+    <h1>Every person deserves<br>a tech career they<br>can <em>prove.</em></h1>
+    <p class="hero-sub">500+ free courses across the entire tech industry. AI tutor. Proctored exams. Blockchain-verified certificates employers actually trust — at zero cost to learners, forever.</p>
+    <div class="tech-pills">
+      <span class="tech-pill">Software Engineering</span>
+      <span class="tech-pill">UI/UX Design</span>
+      <span class="tech-pill">Data Science</span>
+      <span class="tech-pill">Cybersecurity</span>
+      <span class="tech-pill">Cloud &amp; DevOps</span>
+      <span class="tech-pill">AI &amp; ML</span>
+      <span class="tech-pill">Product Management</span>
+      <span class="tech-pill">QA &amp; Testing</span>
+      <span class="tech-pill">Blockchain Dev</span>
+      <span class="tech-pill">Mobile Dev</span>
+    </div>
     <div class="hero-actions">
       <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="btn-accent">Support the Build</a>
       <a href="#problem" class="btn-ghost">See the problem ↓</a>
@@ -434,13 +479,13 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <!-- BANNER -->
 <div class="building-banner">
   <span class="banner-tag">Building Now</span>
-  <p>The platform is fully designed — 164-section spec, complete design system, 500+ courses configured. We are raising to run the code we have already written in our heads.</p>
+  <p>The platform is fully designed — 164-section spec, complete design system, 500+ courses configured across every tech discipline. We are raising to run the code we have already designed in full.</p>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat"><span class="stat-num">100M+</span><span class="stat-label">learning to code globally</span></div>
-  <div class="stat"><span class="stat-num">95%</span><span class="stat-label">dropout rate — free platforms</span></div>
+  <div class="stat"><span class="stat-num">500+</span><span class="stat-label">free tech courses</span></div>
+  <div class="stat"><span class="stat-num">95%</span><span class="stat-label">dropout rate on free platforms</span></div>
   <div class="stat"><span class="stat-num">$15K</span><span class="stat-label">average bootcamp cost</span></div>
   <div class="stat"><span class="stat-num">$0</span><span class="stat-label">cost to learn on Getintotech</span></div>
 </div>
@@ -449,12 +494,12 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <section class="pad" id="problem">
   <div class="wrap">
     <span class="section-tag">The Problem</span>
-    <h2 class="h2">Learning to code is free.<br>Proving it costs everything.</h2>
+    <h2 class="h2">Learning tech is free.<br>Proving it costs everything.</h2>
     <p class="body-p" style="max-width:520px;margin-bottom:0">The credentials employers trust are priced out of reach for most of the world. Free platforms have 95% dropout rates. The gap is not ability. It is access.</p>
     <div class="grid-line problems">
       <div class="problem-card"><span class="problem-num">01</span><h3>No trusted credential</h3><p>GitHub profiles are noise. Portfolios prove nothing. Without a verifiable credential, a year of real learning is invisible to every employer who does not already know you.</p></div>
-      <div class="problem-card"><span class="problem-num">02</span><h3>Free education does not work</h3><p>freeCodeCamp and YouTube made knowledge accessible. But no structure, no AI tutor, no community, no clear path from learning to employment.</p></div>
-      <div class="problem-card"><span class="problem-num">03</span><h3>Children are left out</h3><p>Schools want to teach coding. Quality platforms are expensive. Most school coding tools are too complex for regular teachers to actually deploy and keep using.</p></div>
+      <div class="problem-card"><span class="problem-num">02</span><h3>Free education does not work</h3><p>YouTube and free platforms made knowledge accessible. But no structure, no AI tutor, no community, no clear path from learning to employment. Knowledge without outcomes is worthless.</p></div>
+      <div class="problem-card"><span class="problem-num">03</span><h3>Children are left out</h3><p>Schools want to teach tech. Quality platforms are expensive. Most school tech tools are too complex for regular teachers to actually deploy and keep using week after week.</p></div>
     </div>
   </div>
 </section>
@@ -465,72 +510,126 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
     <span class="section-tag">How It Works</span>
     <h2 class="h2">From zero to <em>employed</em> —<br>we own the whole pipeline.</h2>
     <div class="how-grid">
-      <div class="how-step"><div class="how-num">1</div><div><h3>Learn for free</h3><p>Sign up, take a placement test, skip what you know. AI tutor available 24/7. Spaced repetition built in. Works on any device, even offline.</p></div></div>
-      <div class="how-step"><div class="how-num">2</div><div><h3>Earn a real credential</h3><p>Sit a 90-minute proctored live-coding exam. Unique test cases per attempt. Pass and get a blockchain-verified certificate any employer can verify in seconds.</p></div></div>
-      <div class="how-step"><div class="how-num">3</div><div><h3>Get hired</h3><p>Apply with AI cover letters built from your actual scores. Interview simulator. Offer letter analyser. First lesson to first salary — we own the full pipeline.</p></div></div>
+      <div class="how-step"><div class="how-num">1</div><div><h3>Learn for free</h3><p>Sign up, take a placement test, skip what you know. AI tutor available 24/7 in your language. Spaced repetition built in. Works on any device, even offline.</p></div></div>
+      <div class="how-step"><div class="how-num">2</div><div><h3>Earn a real credential</h3><p>Sit a 90-minute proctored live-coding or practical exam. Unique test cases per attempt. Pass and get a blockchain-verified certificate any employer can verify in seconds.</p></div></div>
+      <div class="how-step"><div class="how-num">3</div><div><h3>Get hired</h3><p>Apply with AI cover letters built from your actual scores. Interview simulator. Offer letter analyser. From first lesson to first salary — we own the full pipeline.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- WHY NOW -->
-<section class="pad">
+<!-- WHAT WE COVER -->
+<section class="pad" id="tech">
   <div class="wrap">
-    <span class="section-tag">Why Now</span>
-    <h2 class="h2">Four tailwinds hit at the<br>exact same time.</h2>
-    <p class="body-p" style="max-width:540px;margin-bottom:0">Getintotech would not have been possible 5 years ago. All four of these shifts happened between 2022 and 2025 — and they all point at us.</p>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-icon">🤖</div><div><h4>AI made personalised tutoring free</h4><p>Before LLMs, a personal tutor cost $50–$200/hour. Claude now delivers Socratic tutoring for fractions of a cent. For the first time, every learner on earth can have a 24/7 tutor in their own language.</p></div></div>
-      <div class="why-card"><div class="why-icon">⛓️</div><div><h4>Blockchain made permanent credentials cheap</h4><p>Minting a certificate hash on Polygon costs under $0.01. A credential that survives the platform, cannot be faked, and any employer can verify in seconds — that was technically impossible to do cheaply before 2021.</p></div></div>
-      <div class="why-card"><div class="why-icon">🌍</div><div><h4>Remote work made global credentials matter</h4><p>A developer in Lagos can now work for a company in London without leaving home. But only if their credential is trusted globally. Physical geography no longer limits talent — credential recognition does.</p></div></div>
-      <div class="why-card"><div class="why-icon">🏛️</div><div><h4>Coding literacy became a government priority</h4><p>50+ countries have launched mandatory coding curricula since 2020. Schools are legally required to teach it. Most have no idea what platform to use. That is our schools market — and it is government-mandated.</p></div></div>
+    <span class="section-tag">What We Cover</span>
+    <h2 class="h2">Not just coding.<br>The <em>entire</em> tech industry.</h2>
+    <p class="body-p" style="max-width:540px;margin-bottom:0">Tech is not just programming. It is design, data, security, cloud, product, AI, and more. We cover every career path in tech with the same depth and the same commitment — free, proctored, blockchain-verified.</p>
+    <div class="tech-cats">
+      <div class="tech-cat"><div class="tech-cat-icon">💻</div><div><h4>Software Engineering</h4><p>Frontend, backend, full stack, mobile, APIs, architecture</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">🎨</div><div><h4>UI/UX Design</h4><p>Figma, user research, interaction design, design systems</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">📊</div><div><h4>Data Science &amp; Analytics</h4><p>Python, SQL, machine learning, data visualisation, statistics</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">🔒</div><div><h4>Cybersecurity</h4><p>Ethical hacking, network security, pen testing, compliance</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">☁️</div><div><h4>Cloud &amp; DevOps</h4><p>AWS, GCP, Azure, Docker, Kubernetes, CI/CD pipelines</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">🤖</div><div><h4>AI &amp; Machine Learning</h4><p>Deep learning, NLP, computer vision, model deployment</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">📱</div><div><h4>Product Management</h4><p>Roadmapping, user stories, metrics, stakeholder management</p></div></div>
+      <div class="tech-cat"><div class="tech-cat-icon">⛓️</div><div><h4>Blockchain &amp; Web3</h4><p>Solidity, smart contracts, DeFi, NFT development</p></div></div>
     </div>
   </div>
 </section>
 
+<!-- WHY NOW -->
+<div class="bg-card2 pad">
+  <div class="wrap">
+    <span class="section-tag">Why Now</span>
+    <h2 class="h2">Four tailwinds hit at the<br>exact same time.</h2>
+    <p class="body-p" style="max-width:540px;margin-bottom:0">Getintotech would not have been possible 5 years ago. All four of these shifts happened between 2022 and 2025.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🤖</div><div><h4>AI made personalised tutoring free</h4><p>Before LLMs, a personal tutor cost $50–$200/hour. Claude now delivers Socratic tutoring for fractions of a cent. Every learner on earth can now have a 24/7 tutor in their own language.</p></div></div>
+      <div class="why-card"><div class="why-icon">⛓️</div><div><h4>Blockchain made permanent credentials cheap</h4><p>Minting a certificate hash on Polygon costs under $0.01. A credential that survives the platform, cannot be faked, any employer can verify — that was too expensive to do before 2021.</p></div></div>
+      <div class="why-card"><div class="why-icon">🌍</div><div><h4>Remote work made global credentials matter</h4><p>A designer in Lagos can now work for a company in London without leaving home. But only if their credential is trusted globally. Credential recognition is the remaining barrier.</p></div></div>
+      <div class="why-card"><div class="why-icon">🏛️</div><div><h4>Tech literacy became a government mandate</h4><p>50+ countries have launched mandatory tech curricula since 2020. Schools are legally required to teach it. Most have no platform to use. That is our schools market — government-created demand.</p></div></div>
+    </div>
+  </div>
+</div>
+
 <!-- FEATURES -->
-<div class="bg-card2 pad-lg" id="features">
+<section class="pad-lg" id="features">
   <div class="wrap">
     <div class="features-header">
       <div>
         <span class="section-tag">What Makes Us Different</span>
-        <h2 class="h2">22 features. Nobody has built all of them together. For free.</h2>
+        <h2 class="h2">23 features. Nobody has<br>built all of them. For free.</h2>
       </div>
-      <p class="body-p">Every platform solves one piece. We own the complete pipeline from first lesson to employed developer. Features marked <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:.76rem">UNIQUE</span> do not exist anywhere else.</p>
+      <p class="body-p">Every platform solves one piece. We own the complete pipeline from first lesson to employed. Features marked <span style="color:var(--accent);font-family:'DM Mono',monospace;font-size:.76rem">UNIQUE</span> do not exist anywhere else at all.</p>
     </div>
     <div class="grid-line features-grid">
-      <div class="feature-card u"><span class="feature-emoji">📜</span><h4>Proctored Blockchain Certificates</h4><p>90-min live coding exam. Unique test cases per attempt — cannot be Googled. Three tiers: Pass, Merit, Distinction. Hash on Polygon. Employer verifies in seconds, no account needed.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">⚔️</span><h4>Arena — Multiplayer Coding Battles</h4><p>Real-time battles: Sprint, Debug, Code Golf, Team 3v3. Elo rating per language. Employer spectator mode — companies watch live and invite top performers directly to interview.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🤝</span><h4>Collab — Pair Programming</h4><p>Matched by level, language, timezone. Shared editor with voice. Driver/navigator rotation. Collaboration score visible on profile and sent with every job application.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🧠</span><h4>Exam Readiness Prediction</h4><p>Before any exam: "73% chance of passing. Weak areas: closures, async/await." Two options: sit the exam or fix weak areas — curated review generated automatically.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🗺️</span><h4>Knowledge Map Visualisation</h4><p>Interactive graph of every concept learned. Colour-coded by strength. Click any node to jump to that lesson. Shareable. Employer-visible on public portfolio.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🏆</span><h4>Developer Reputation Score</h4><p>Composite: cert tier, code quality, Arena Elo, collaboration, freelance ratings. Percentile rank: "Top 8% of developers." Queryable by employers and ATS systems via public API.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">✍️</span><h4>Cover Letter AI</h4><p>Platform knows your certs, scores, and projects. When you apply, AI generates a personalised cover letter in 10 seconds using your actual performance data. No other job board does this.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">📊</span><h4>Offer Letter Analyser</h4><p>Paste a job offer. Platform flags if salary is fair, finds missing clauses, compares to similar offers, and generates a negotiation script for every weak point.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🧪</span><h4>Teach It Back Mode</h4><p>After any lesson, explain the concept to the AI as if to a beginner. AI evaluates accuracy and asks targeted follow-ups to expose gaps. Based on the Feynman Technique.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🔋</span><h4>Learning Fatigue Detection</h4><p>At 60 min: gentle break suggestion. At 90: stronger. At 2 hours: "Come back tomorrow." We optimise for real retention, not screen time. Anti-Duolingo by design.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🌍</span><h4>Purchasing Power Parity Pricing</h4><p>Pro costs one meal per month in every economy. India: ₹150. Indonesia: Rp 25,000. US: $5. Same platform. Same exams. Same certificates. Nobody priced out.</p></div>
-      <div class="feature-card u"><span class="feature-emoji">🌐</span><h4>Developer Directory + Reputation API</h4><p>Searchable directory of certified developers. Filter by language, tier, availability, location. Reputation score queryable by employers via documented public API.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🤖</span><h4>AI Tutor in Your Language</h4><p>Powered by Claude. Socratic method — never gives answers directly. Responds in the learner's language automatically. Opens proactively after 5 minutes without progress.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🎙️</span><h4>Interview Simulator</h4><p>Claude plays technical interviewer via voice. Phone screen, technical, system design, behavioural. Company-specific prep. Detailed feedback report on every session.</p></div>
-      <div class="feature-card"><span class="feature-emoji">💼</span><h4>Job Board — Salary Mandatory</h4><p>No "competitive salary." Every listing requires a real range. Ghost job detection — listings auto-expire after 30 days. Company trust score on every listing.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🧑‍🏫</span><h4>Mentor Marketplace</h4><p>Certificate required to mentor — quality enforced. Escrow payment held until session confirmed. 15% commission. Free weekly group sessions from top mentors.</p></div>
-      <div class="feature-card"><span class="feature-emoji">💰</span><h4>Freelance Board with Escrow</h4><p>Certified developers only. Client deposits at project start. Auto-release after approval. Platform dispute resolution. Completed projects auto-added to portfolio.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🔬</span><h4>Code Quality Scanner</h4><p>Paste code or a GitHub URL. Returns security issues, performance, code smell, test coverage, complexity. Shareable quality badge. Free for learners.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🖥️</span><h4>Full In-Browser IDE</h4><p>Terminal, file system, Git, package manager, local server — in the browser. Pre-configured per lesson. Works on a Chromebook, a phone, any device. No setup.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🧬</span><h4>Spaced Repetition Built In</h4><p>SM-2 algorithm schedules concept reviews at increasing intervals. Daily review card. Deliberate practice generates infinite variations of mastered concepts.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🎯</span><h4>Placement Tests — Skip Ahead</h4><p>Test out of what you already know in 5–10 minutes. Start exactly where you should. Score stored on profile.</p></div>
-      <div class="feature-card"><span class="feature-emoji">🏫</span><h4>Getintotech Schools</h4><p>Full classroom management. Age 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot. $10/month per school. 50% off low-income schools.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">📜</span><h4>Proctored Blockchain Certificates</h4><p>90-min live practical exam. Unique test cases per attempt — cannot be Googled. Three tiers: Pass, Merit, Distinction. Hash on Polygon blockchain. Employer verifies in seconds, no account needed.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🏫</span><h4>School Onboarding in Under 10 Minutes</h4><p>Admin signs up, adds teachers via CSV or link, teachers add students, classes are live. Pre-built lesson plans for every age group. No technical knowledge required from any teacher. Setup to first lesson in under 10 minutes.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">⚔️</span><h4>Arena — Multiplayer Tech Battles</h4><p>Real-time battles: Sprint, Debug, Code Golf, Design Challenge, Team 3v3. Elo rating per discipline. Employer spectator mode — companies watch live and invite top performers directly to interview.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🤝</span><h4>Collab — Live Pair Sessions</h4><p>Matched by level, discipline, and timezone. Shared editor with voice. Driver/navigator rotation. Collaboration score visible on profile and sent with every job application automatically.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🧠</span><h4>Exam Readiness Prediction</h4><p>Before any exam: "73% chance of passing. Weak areas: async/await, closures." Two options: sit the exam or fix weak areas — targeted review generated automatically from your performance data.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🗺️</span><h4>Knowledge Map Visualisation</h4><p>Interactive graph of every concept learned across every discipline. Colour-coded by strength. Click any node to jump to that lesson. Shareable. Simplified version visible to employers on your public portfolio.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🏆</span><h4>Tech Reputation Score</h4><p>Composite: cert tier, code quality, Arena Elo, collaboration score, freelance ratings, community contribution. Percentile rank: "Top 8% of Getintotech members." Queryable by employers via public API.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">✍️</span><h4>Cover Letter AI</h4><p>Platform knows your certs, scores, and projects. When you apply, AI generates a personalised cover letter in 10 seconds using your actual performance data. No other job board on earth does this.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">📊</span><h4>Offer Letter Analyser</h4><p>Paste a job offer. Platform flags if salary is fair for the role and market, finds missing clauses, compares to similar offers, and generates a specific negotiation script for every weak point found.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🧪</span><h4>Teach It Back Mode</h4><p>After any lesson, explain the concept to the AI as if to a complete beginner. AI evaluates accuracy and asks targeted follow-ups to expose gaps. Based on the Feynman Technique. Counts as a streak day.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🔋</span><h4>Learning Fatigue Detection</h4><p>At 60 min: gentle break suggestion. At 90: stronger. At 2 hours: "Come back tomorrow." We optimise for real retention, not screen time. Anti-Duolingo by design — we want you to retain, not return.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🌍</span><h4>Purchasing Power Parity Pricing</h4><p>Pro costs one meal per month in every economy. India: ₹150. Indonesia: Rp 25,000. Nigeria: ₦2,000. US: $5. Same platform. Same exams. Same certificates. Nobody priced out of Pro features.</p></div>
+      <div class="feature-card u"><span class="feature-emoji">🌐</span><h4>Member Directory + Reputation API</h4><p>Searchable directory of all certified members. Filter by discipline, tier, availability, location. Reputation score queryable by employers and ATS systems via a documented, HMAC-signed public API.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🤖</span><h4>AI Tutor in Your Language</h4><p>Powered by Claude. Socratic method — never gives answers directly, guides you to find them. Responds in your language automatically. Opens proactively after 5 minutes without progress on any lesson.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🎙️</span><h4>Interview Simulator</h4><p>Claude plays interviewer via voice. Technical, system design, behavioural, and role-specific rounds (design critique, data case study, security audit). Detailed feedback report on every single session.</p></div>
+      <div class="feature-card"><span class="feature-emoji">💼</span><h4>Job Board — Salary Mandatory</h4><p>No "competitive salary." Every listing requires a real salary range. Ghost job detection — listings auto-expire after 30 days. Company trust score on every listing shows response rate and candidate feedback.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🧑‍🏫</span><h4>Mentor Marketplace</h4><p>Certificate required to become a mentor — quality is enforced, not assumed. Escrow payment held until session confirmed. 15% commission. Free weekly group office hours from top-rated mentors.</p></div>
+      <div class="feature-card"><span class="feature-emoji">💰</span><h4>Freelance Board with Escrow</h4><p>Certified members only can apply. Client deposits at project start. Auto-release after approval. Platform dispute resolution. Completed projects automatically added to public portfolio.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🔬</span><h4>Work Quality Scanner</h4><p>Paste code, a Figma link, or a GitHub URL. Returns quality score, specific issues, and line-by-line recommendations. Shareable quality badge. Free for learners. Paid API for companies.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🖥️</span><h4>Full In-Browser IDE</h4><p>Terminal, file system, Git, package manager, local server — all in the browser. Pre-configured per lesson. Works on a Chromebook, a phone, any device anywhere in the world. No installation.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🧬</span><h4>Spaced Repetition Built In</h4><p>SM-2 algorithm schedules concept reviews at increasing intervals. Daily review card in dashboard. Deliberate practice mode generates infinite variations of mastered concepts so you never plateau.</p></div>
+      <div class="feature-card"><span class="feature-emoji">🎯</span><h4>Placement Tests — Skip Ahead</h4><p>Experienced learners test out of what they already know in 5–10 minutes. Start exactly where you should. No sitting through basics you mastered years ago. Score stored and visible on profile.</p></div>
+      <div class="feature-card"><span class="feature-emoji">📱</span><h4>Offline Mode</h4><p>Download lessons, exercises, and review cards for offline use. Works on the slowest mobile data. Built for learners in markets with unreliable internet — because that is most of the world.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOL ONBOARDING -->
+<div class="bg-card pad">
+  <div class="wrap">
+    <span class="section-tag">School Onboarding — A Unique Advantage</span>
+    <h2 class="h2">From school admin sign-up<br>to first lesson in <em>under 10 minutes.</em></h2>
+    <p class="body-p" style="max-width:560px;margin-bottom:0">Every other school platform requires IT setup, training days, and weeks of onboarding. We built a system that any teacher can use from day one with zero technical knowledge. This is our single biggest competitive advantage in the schools market.</p>
+    <div class="onboard-layout">
+      <div class="onboard-steps">
+        <div class="onboard-step"><div class="onboard-step-num">1</div><div><h5>Admin signs up</h5><p>School admin creates an account in 2 minutes. Enters school name, country, student age range. No IT department needed.</p></div></div>
+        <div class="onboard-step"><div class="onboard-step-num">2</div><div><h5>Teachers added instantly</h5><p>Upload a CSV or share an invite link. Teachers create accounts with one click. No email verification delays.</p></div></div>
+        <div class="onboard-step"><div class="onboard-step-num">3</div><div><h5>Classes created</h5><p>Teachers create a class in 30 seconds. Students join via a 6-character code or QR code. No student email addresses required.</p></div></div>
+        <div class="onboard-step"><div class="onboard-step-num">4</div><div><h5>Curriculum auto-assigned</h5><p>Platform suggests age-appropriate curriculum based on student age group. Teacher selects or customises. First lesson is ready immediately.</p></div></div>
+        <div class="onboard-step"><div class="onboard-step-num">5</div><div><h5>First lesson begins</h5><p>Students open the platform on any device — phone, tablet, laptop, Chromebook. No app download. Lesson starts. Total time from signup: under 10 minutes.</p></div></div>
+      </div>
+      <div>
+        <div class="onboard-card">
+          <p class="onboard-card-title">Why This Matters for Investors</p>
+          <div class="onboard-stat-row"><span>Time to first lesson</span><span>&lt;10 minutes</span></div>
+          <div class="onboard-stat-row"><span>IT knowledge required</span><span>None</span></div>
+          <div class="onboard-stat-row"><span>Devices supported</span><span>All</span></div>
+          <div class="onboard-stat-row"><span>App download required</span><span>No</span></div>
+          <div class="onboard-stat-row"><span>Student email required</span><span>No</span></div>
+          <div class="onboard-stat-row"><span>Training days needed</span><span>Zero</span></div>
+          <div class="onboard-stat-row"><span>School churn reason #1 in edtech</span><span>Complexity</span></div>
+          <div class="onboard-stat-row"><span>Our answer to that</span><span>10-min onboarding</span></div>
+        </div>
+        <div class="schools-note" style="margin-top:1.5rem;border:none">
+          <p><strong>Why school churn is near zero:</strong> Schools leave platforms because teachers find them too complex. We removed every possible friction point. A school that onboards in 10 minutes and uses the platform in week one will still be using it in year three. That is the retention mechanism that makes the unit economics so compelling.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- CERT -->
-<div class="bg-card pad">
+<section class="pad">
   <div class="wrap cert-section">
     <div class="cert-mockup">
       <p class="cert-mockup-label">Certificate of Completion</p>
       <p class="cert-name">Amara Okafor</p>
-      <p class="cert-course">Advanced JavaScript — Full Stack</p>
+      <p class="cert-course">Advanced JavaScript — Full Stack Engineering</p>
       <span class="cert-tier">DISTINCTION</span>
       <div class="cert-stats">
         <div class="cs"><span class="cs-val">97%</span><span class="cs-lbl">Score</span></div>
@@ -542,86 +641,79 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
     <div class="cert-copy">
       <span class="section-tag">The Certificate</span>
       <h2>A credential employers actually trust. Earned, not bought.</h2>
-      <p>The exam is 90 minutes of live coding. Unique test cases generated for every attempt — impossible to Google, share, or cheat.</p>
+      <p>The exam is 90 minutes of live practical work. Unique test cases generated per attempt — impossible to Google, share, or cheat on. Works across every tech discipline.</p>
       <p>The certificate hash is stored permanently on the Polygon blockchain. Any employer anywhere can verify it in under 10 seconds. No account required. The record survives even if this platform shuts down.</p>
-      <p>The exam is free. The certificate is free. The verification is free for employers.</p>
+      <p>The exam is free. The certificate is free. Employer verification is free.</p>
     </div>
   </div>
-</div>
+</section>
 
 <!-- COMPARISON -->
-<section class="pad">
+<div class="bg-card2 pad">
   <div class="wrap">
     <span class="section-tag">How We Compare</span>
     <h2 class="h2">Everyone solves one piece.<br>We own the whole pipeline.</h2>
     <div class="comparison-scroll">
       <table class="comparison-table">
         <thead>
-          <tr>
-            <th>Feature</th>
-            <th class="us">Getintotech</th>
-            <th>freeCodeCamp</th>
-            <th>Coursera</th>
-            <th>Udemy</th>
-          </tr>
+          <tr><th>Feature</th><th class="us">Getintotech</th><th>freeCodeCamp</th><th>Coursera</th><th>Udemy</th></tr>
         </thead>
         <tbody>
           <tr><td>Free to learn</td><td class="tick">✓</td><td class="tick">✓</td><td class="partial">Partial</td><td class="cross">✗ Paid</td></tr>
-          <tr><td>Proctored live-coding exam</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Covers all tech (not just coding)</td><td class="tick">✓</td><td class="cross">✗</td><td class="partial">Partial</td><td class="partial">Partial</td></tr>
+          <tr><td>Proctored live exam</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>Blockchain-verified certificates</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>AI tutor (Socratic method)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Multiplayer coding battles</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Pair programming with score</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Multiplayer tech battles</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Pair sessions with score</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>Job board with mandatory salary</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>AI cover letter from your data</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>AI cover letter from real data</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>Interview simulator (voice)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>Offer letter analyser</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Developer reputation score</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Spaced repetition built in</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>Mentor marketplace</td><td class="tick">✓</td><td class="cross">✗</td><td class="partial">External</td><td class="cross">✗</td></tr>
-          <tr><td>Freelance board with escrow</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
           <tr><td>Schools product (age 6–17)</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
-          <tr><td>PPP-adjusted pricing globally</td><td class="tick">✓</td><td>N/A</td><td class="cross">✗</td><td class="partial">Partial</td></tr>
+          <tr><td>School onboarding &lt;10 minutes</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>PPP-adjusted pricing globally</td><td class="tick">✓</td><td>N/A</td><td class="cross">✗</td><td class="partial">Partial</td></div></td></tr>
+          <tr><td>Freelance board with escrow</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+          <tr><td>Offline mode for low connectivity</td><td class="tick">✓</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-</section>
-
-<!-- MOAT -->
-<div class="bg-card pad">
-  <div class="wrap">
-    <span class="section-tag">Competitive Moat</span>
-    <h2 class="h2">Four reasons this cannot be<br>copied in 6 months.</h2>
-    <p class="body-p" style="max-width:520px;margin-bottom:0">Features can be copied. These cannot.</p>
-    <div class="moat-grid">
-      <div class="moat-card"><span class="moat-num">Moat 01</span><h4>Network Effects — Employers</h4><p>Employers only trust certificates after seeing many certified developers perform well. Every hire from Getintotech builds credibility. A competitor starting today has zero employer trust. We accumulate it with every hire.</p></div>
-      <div class="moat-card"><span class="moat-num">Moat 02</span><h4>Blockchain Permanence — First Mover</h4><p>Our blockchain certificate records are permanent and growing. Every certificate issued is a data point that anchors our credibility. A later entrant starts with zero immutable records.</p></div>
-      <div class="moat-card"><span class="moat-num">Moat 03</span><h4>Reputation Score — Data Flywheel</h4><p>The developer reputation score gets more accurate with more users. More users = better scores = more employer trust = more users. The score is impossible to replicate without years of transaction data.</p></div>
-      <div class="moat-card"><span class="moat-num">Moat 04</span><h4>Schools — Annual Contracts, Near-Zero Churn</h4><p>Schools sign annual contracts and rarely switch tools mid-year. Once a school trains teachers on our platform, the switching cost is enormous. 100 schools in year one = 95+ renewals in year two.</p></div>
-    </div>
-  </div>
 </div>
 
-<!-- UNIT ECONOMICS -->
+<!-- MOAT -->
 <section class="pad">
   <div class="wrap">
+    <span class="section-tag">Competitive Moat</span>
+    <h2 class="h2">Four reasons this cannot<br>be copied in 6 months.</h2>
+    <div class="moat-grid">
+      <div class="moat-card"><span class="moat-num">Moat 01</span><h4>Network Effects — Employer Trust</h4><p>Employers only trust certificates after seeing many certified members perform well. Every hire from Getintotech builds credibility. A competitor starting today has zero employer trust. We accumulate it with every hire made.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 02</span><h4>Blockchain Permanence — First Mover</h4><p>Our blockchain certificate records are permanent and growing. Every certificate issued is an immutable data point anchoring our credibility. A later entrant starts with zero permanent records.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 03</span><h4>Reputation Score — Data Flywheel</h4><p>The member reputation score gets more accurate and valuable with more users. More users = better scores = more employer trust = more users. Impossible to replicate without years of real transaction data.</p></div>
+      <div class="moat-card"><span class="moat-num">Moat 04</span><h4>Schools — Annual Contracts, Near-Zero Churn</h4><p>Schools sign annual contracts. Once teachers are trained on our platform, switching cost is enormous. Our 10-minute onboarding means they actually use it — and once used habitually, almost never leave.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIT ECONOMICS -->
+<div class="bg-card pad">
+  <div class="wrap">
     <span class="section-tag">Schools Unit Economics</span>
-    <h2 class="h2">The most defensible SaaS unit economics<br>in edtech.</h2>
+    <h2 class="h2">The best SaaS unit economics<br>in edtech. By far.</h2>
     <div class="unit-layout">
       <div>
         <table class="unit-table">
-          <tr><td>Customer acquisition cost (school)</td><td class="accent">~$0</td></tr>
+          <tr><td>Customer acquisition cost (school)</td><td class="ac">~$0</td></tr>
           <tr><td>Average contract value (annual)</td><td>$324 – $804</td></tr>
-          <tr><td>Gross margin</td><td class="accent">~85%</td></tr>
-          <tr><td>Payback period</td><td class="accent">Month 1</td></tr>
-          <tr><td>Annual churn rate (estimated)</td><td>&lt;5%</td></tr>
-          <tr><td>LTV (5-year, avg school)</td><td class="accent">$2,700+</td></tr>
-          <tr><td>10,000 schools × avg $27/mo</td><td class="accent">$3.24M ARR</td></tr>
-          <tr><td>1,000,000 schools × avg $27/mo</td><td class="accent">$324M ARR</td></tr>
+          <tr><td>Gross margin</td><td class="ac">~85%</td></tr>
+          <tr><td>Payback period</td><td class="ac">Month 1</td></tr>
+          <tr><td>Estimated annual churn rate</td><td>&lt;5%</td></tr>
+          <tr><td>LTV (5-year, avg school)</td><td class="ac">$2,700+</td></tr>
+          <tr><td>10,000 schools × avg $27/mo</td><td class="ac">$3.24M ARR</td></tr>
+          <tr><td>1,000,000 schools × avg $27/mo</td><td class="ac">$324M ARR</td></tr>
         </table>
         <div class="unit-highlight">
-          <p>Schools are acquired through SEO, word of mouth between teachers, and government mandates — not paid ads. <strong>CAC is near zero.</strong> A school at $27/month paying for 5 years is $1,620 of revenue on $0 of acquisition cost. There is no paid CAC business with these numbers in edtech.</p>
+          <p>Schools are acquired through SEO, teacher word-of-mouth, and government mandates — not paid ads. <strong>CAC is near zero.</strong> A school paying $27/month for 5 years = $1,620 revenue on $0 acquisition cost. There is no other paid CAC business with numbers like this in edtech.</p>
         </div>
       </div>
       <div>
@@ -632,10 +724,10 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
           <div class="proj-row"><span class="proj-label">Month 12 — 25K learners</span><span class="proj-val ac">$25–40K/mo</span></div>
           <div class="proj-row"><span class="proj-label">10,000 schools milestone</span><span class="proj-val ac">$270K/mo</span></div>
           <div class="proj-row"><span class="proj-label">100,000 schools</span><span class="proj-val ac">$2.7M/mo</span></div>
-          <div class="proj-row"><span class="proj-label">1M schools (0.77% of global)</span><span class="proj-val ac">$27M/mo</span></div>
+          <div class="proj-row"><span class="proj-label">1M schools (0.77% global)</span><span class="proj-val ac">$27M/mo</span></div>
         </div>
         <div class="schools-note">
-          <p><strong>130M schools globally.</strong> 1M schools is 0.77% of the market. At 50+ countries mandating coding curricula, 0.77% is a conservative number. This is not a moonshot — it is a market penetration question.</p>
+          <p><strong>130M+ schools globally.</strong> 1M schools is 0.77% of the market. With 50+ countries mandating tech curricula and near-zero CAC, 0.77% is conservative. This is not a moonshot — it is a penetration question.</p>
         </div>
       </div>
     </div>
@@ -648,9 +740,9 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
     <span class="section-tag">Three Products. One Mission.</span>
     <h2 class="h2">Learners are always free.<br>Revenue comes from everyone else.</h2>
     <div class="grid-line products-grid">
-      <div class="product-card feat"><span class="product-badge">★ Core Product</span><h3>Getintotech Learn</h3><p>Free for every learner on earth. 500+ courses, AI tutor, proctored exams, blockchain certs, Arena, Collab, job board, interview simulator, mentor marketplace, freelance board. No paywalls. Ever.</p><div class="product-price">$0</div><div class="product-price-note">forever, for learners</div></div>
-      <div class="product-card"><span class="product-badge">B2B · Primary Revenue</span><h3>Getintotech Schools</h3><p>Full classroom management for schools worldwide. Age 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot. 50% off low-income schools.</p><div class="product-price">$10–$67</div><div class="product-price-note">per school per month</div></div>
-      <div class="product-card"><span class="product-badge">B2B · Revenue</span><h3>Getintotech for Companies</h3><p>Team training, skills gap analysis, bulk certificate verification, talent pool access, ATS integrations with Greenhouse, Lever, and Workday. Skills Intelligence API.</p><div class="product-price">$299–$699</div><div class="product-price-note">per month</div></div>
+      <div class="product-card feat"><span class="product-badge">★ Core Product</span><h3>Getintotech Learn</h3><p>Free for every learner on earth. 500+ tech courses, AI tutor, proctored exams, blockchain certs, Arena, Collab, job board, interview simulator, mentor marketplace, freelance board, offline mode. No paywalls. Ever.</p><div class="product-price">$0</div><div class="product-price-note">forever, for learners</div></div>
+      <div class="product-card"><span class="product-badge">B2B · Primary Revenue</span><h3>Getintotech Schools</h3><p>Full classroom management for schools worldwide. Age 6–17. Teacher dashboards, parent portal, student progress, lesson plan library, Byte mascot. Setup in under 10 minutes. 50% off low-income schools.</p><div class="product-price">$10–$67</div><div class="product-price-note">per school per month</div></div>
+      <div class="product-card"><span class="product-badge">B2B · Revenue</span><h3>Getintotech for Companies</h3><p>Team training across all tech disciplines, skills gap analysis, bulk certificate verification, talent pool access, ATS integrations with Greenhouse, Lever, and Workday.</p><div class="product-price">$299–$699</div><div class="product-price-note">per month</div></div>
     </div>
   </div>
 </div>
@@ -662,13 +754,13 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
     <h2 class="h2">Seven streams.<br>Learners fund none of them.</h2>
     <div class="revenue-layout">
       <div>
-        <div class="revenue-row"><div><div class="revenue-name">Schools Subscriptions</div><div class="revenue-detail">$10–$67/month per school — recurring, low churn</div></div><div class="revenue-val">Primary</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Schools Subscriptions</div><div class="revenue-detail">$10–$67/month per school — recurring, near-zero churn</div></div><div class="revenue-val">Primary</div></div>
         <div class="revenue-row"><div><div class="revenue-name">Job Board Listings</div><div class="revenue-detail">$49 standard / $99 featured — 30 days</div></div><div class="revenue-val">$49–$99</div></div>
         <div class="revenue-row"><div><div class="revenue-name">Pro Subscriptions</div><div class="revenue-detail">Unlimited AI, interview simulator, premium content</div></div><div class="revenue-val">$5/mo</div></div>
-        <div class="revenue-row"><div><div class="revenue-name">Developer Tool Advertising</div><div class="revenue-detail">Highly targeted — developers are the audience</div></div><div class="revenue-val">$150–$1K</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Tech Tool Advertising</div><div class="revenue-detail">Highly targeted — tech professionals are the audience</div></div><div class="revenue-val">$150–$1K</div></div>
         <div class="revenue-row"><div><div class="revenue-name">Companies Product</div><div class="revenue-detail">Team training, skills gaps, ATS integrations</div></div><div class="revenue-val">$299/mo</div></div>
         <div class="revenue-row"><div><div class="revenue-name">Certificate Verify API</div><div class="revenue-detail">Bulk employer verification, ATS integration</div></div><div class="revenue-val">$99/mo</div></div>
-        <div class="revenue-row"><div><div class="revenue-name">Mentor &amp; Freelance Commission</div><div class="revenue-detail">15% on mentor sessions, 10% on freelance</div></div><div class="revenue-val">10–15%</div></div>
+        <div class="revenue-row"><div><div class="revenue-name">Mentor &amp; Freelance Commission</div><div class="revenue-detail">15% on mentor sessions, 10% on freelance projects</div></div><div class="revenue-val">10–15%</div></div>
       </div>
       <div>
         <div class="projections">
@@ -679,7 +771,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
           <div class="proj-row"><span class="proj-label">10,000 schools target</span><span class="proj-val ac">$270K/mo</span></div>
         </div>
         <div class="schools-note">
-          <p><strong>The schools asymmetric bet:</strong> 130M+ schools globally. Even 0.01% adoption at avg $27/mo = $35M MRR. Schools pay monthly, churn slowly, refer each other. This is not a projection — it is a penetration question.</p>
+          <p><strong>The asymmetric bet:</strong> 130M+ schools globally. Even 0.01% adoption at avg $27/mo = $35M MRR. Schools pay monthly, churn slowly, refer each other. This is a penetration question, not a product question.</p>
         </div>
       </div>
     </div>
@@ -689,14 +781,23 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <!-- THE ASK -->
 <div class="ask-wrap pad" id="ask">
   <div class="wrap">
-    <span class="section-tag">The Ask</span>
-    <h2 class="h2">Raising <em>$500,000</em> to reach<br>10,000 schools.</h2>
+    <span class="section-tag">The Investment Opportunity</span>
+    <h2 class="h2">We are raising.<br>Every check size <em>welcome.</em></h2>
     <div class="ask-grid">
       <div>
-        <div class="ask-hero-num">$500K</div>
-        <p class="ask-sub">Pre-seed round. This is the number that gets us from fully designed to fully launched and to 10,000 paying schools in 12 months.</p>
-        <div class="ask-bridge">
-          <p><strong>First check welcome from $25K.</strong> We are also open to a bridge raise of $100–150K to get to launch and first 500 schools, then raise the full round on traction. Whatever gets us moving fastest is the right structure.</p>
+        <div class="ask-range">$25K → $500K</div>
+        <p class="ask-sub">We are raising a pre-seed round with no minimum check size. Whether you can write $25,000 or $500,000 — we want to talk. The first check is the hardest to close. Help us close it.</p>
+        <div class="ask-tiers">
+          <div class="ask-tier"><div class="ask-tier-label"><strong>$25K–$50K</strong>Bridge check — gets us to launch</div><div class="ask-tier-val">Welcome</div></div>
+          <div class="ask-tier highlight"><div class="ask-tier-label"><strong>$100K–$200K</strong>Gets us to V1 + first 500 schools</div><div class="ask-tier-val">Ideal first close</div></div>
+          <div class="ask-tier"><div class="ask-tier-label"><strong>$500K</strong>Full pre-seed — 10,000 schools in 12 months</div><div class="ask-tier-val">Target total</div></div>
+        </div>
+        <div class="ask-note">
+          <p><strong>No investor is too small.</strong> No investor is too large. No preference on geography, fund size, or sector focus. If you believe that tech education should be free and credentials should mean something — we want you on the cap table.</p>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;gap:.65rem;flex-wrap:wrap">
+          <a href="https://calendly.com/shrawn/online-meetings" target="_blank" class="btn-accent">Book a call →</a>
+          <a href="mailto:lekanakinuli@gmail.com" class="btn-outline">Email the founder</a>
         </div>
       </div>
       <div>
@@ -707,21 +808,16 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
           <div class="ask-row"><span class="ask-label">Founder salary (12 months, lean)</span><span class="ask-val">$50,000</span></div>
           <div class="ask-row"><span class="ask-label">Legal &amp; compliance (COPPA, GDPR)</span><span class="ask-val">$50,000</span></div>
           <div class="ask-row"><span class="ask-label">Hosting &amp; infrastructure</span><span class="ask-val">$30,000</span></div>
-          <div class="ask-row"><span class="ask-label">Buffer (20%)</span><span class="ask-val">$40,000</span></div>
-          <div class="ask-row" style="background:rgba(200,245,66,0.06)"><span class="ask-label" style="color:var(--accent);font-weight:700">Total</span><span class="ask-val" style="color:var(--accent);font-weight:800;font-size:.92rem">$500,000</span></div>
+          <div class="ask-row"><span class="ask-label">Buffer</span><span class="ask-val">$40,000</span></div>
+          <div class="ask-row" style="background:rgba(200,245,66,0.06)"><span class="ask-label" style="color:var(--accent);font-weight:700">Total raise target</span><span class="ask-val" style="color:var(--accent);font-weight:800">$500,000</span></div>
         </div>
         <div class="ask-return">
-          <h4>Why this returns well</h4>
+          <h4>The return at 10,000 schools</h4>
           <p><strong>10,000 schools × avg $27/mo = $270,000 MRR</strong> at month 12.</p>
-          <p><strong>$3.24M ARR</strong> by end of year one from schools alone — before job board, companies product, or pro subscriptions.</p>
-          <p>At a conservative <strong>5× revenue multiple</strong> that is a $16.2M valuation on a $500K investment. At 10× (normal SaaS with 85% margins), it is $32.4M.</p>
+          <p><strong>$3.24M ARR</strong> from schools alone — before job board, companies product, or pro subscriptions.</p>
+          <p>At a conservative <strong>5× revenue multiple = $16.2M valuation</strong> on a $500K investment. At 10× SaaS multiple = $32.4M.</p>
         </div>
       </div>
-    </div>
-    <div class="investors-note">
-      <h4>Who we want to talk to</h4>
-      <p><strong>Angels and micro-VCs</strong> who understand edtech, developer tools, or African/global tech. <strong>Iyin Aboyeji</strong> (Andela, Flutterwave co-founder — built the African developer ecosystem), <strong>Techstars Africa</strong>, <strong>YC</strong>, <strong>Founders Factory Africa</strong>, and any investor who has seen what happens when you remove price as a barrier to education.</p>
-      <p>We are also open to <strong>strategic angels</strong> — ex-educators, school system administrators, developer advocates — who can open doors faster than capital alone.</p>
     </div>
   </div>
 </div>
@@ -729,13 +825,13 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <!-- ROADMAP -->
 <div class="bg-card pad">
   <div class="wrap">
-    <span class="section-tag">Roadmap — What This Money Unlocks</span>
+    <span class="section-tag">Roadmap</span>
     <h2 class="h2">4 weeks to V1.<br>12 months to <em>10,000 schools.</em></h2>
     <div class="roadmap">
-      <div class="roadmap-item"><span class="roadmap-phase">Weeks 1–4</span><div class="roadmap-content"><h4>V1 Launch — The Core</h4><p>Full lesson engine, AI tutor, exam system, blockchain certificates, job board, dashboard, auth, Supabase backend.</p><div class="roadmap-tags"><span>500+ courses</span><span>Exams + certs</span><span>Job board</span><span>AI tutor</span></div></div></div>
-      <div class="roadmap-item"><span class="roadmap-phase">Month 2–3</span><div class="roadmap-content"><h4>Community + Arena</h4><p>Multiplayer Arena, pair programming Collab, mentor marketplace, forums, study groups, gamification.</p><div class="roadmap-tags"><span>Arena battles</span><span>Pair programming</span><span>Mentors</span><span>Forums</span></div></div></div>
-      <div class="roadmap-item"><span class="roadmap-phase">Month 3–6</span><div class="roadmap-content"><h4>Schools + Career Layer</h4><p>Schools product launched, interview simulator, cover letter AI, offer analyser, freelance board, companies product.</p><div class="roadmap-tags"><span>Schools live</span><span>Interview sim</span><span>Freelance board</span><span>Cover letter AI</span></div></div></div>
-      <div class="roadmap-item"><span class="roadmap-phase">Month 6–12</span><div class="roadmap-content"><h4>Scale to 10,000 Schools</h4><p>Active school outreach, reputation API, certificate verify API, VS Code extension, in-browser IDE, first 10K schools target.</p><div class="roadmap-tags"><span>10K schools</span><span>Public API</span><span>In-browser IDE</span><span>VS Code ext</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Weeks 1–4</span><div class="roadmap-content"><h4>V1 Launch — The Core</h4><p>Full lesson engine, AI tutor, exam system, blockchain certs, job board, dashboard, auth, Supabase backend. All 500+ courses live.</p><div class="roadmap-tags"><span>500+ courses</span><span>Exams + certs</span><span>Job board</span><span>AI tutor</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 2–3</span><div class="roadmap-content"><h4>Community + Arena</h4><p>Multiplayer Arena, pair programming Collab, mentor marketplace, community forums, study groups, gamification system.</p><div class="roadmap-tags"><span>Arena</span><span>Pair sessions</span><span>Mentors</span><span>Forums</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 3–6</span><div class="roadmap-content"><h4>Schools + Career Layer</h4><p>Schools product with 10-minute onboarding launched. Interview simulator, cover letter AI, offer analyser, freelance board, companies product.</p><div class="roadmap-tags"><span>Schools live</span><span>Interview sim</span><span>Freelance board</span><span>Cover letter AI</span></div></div></div>
+      <div class="roadmap-item"><span class="roadmap-phase">Month 6–12</span><div class="roadmap-content"><h4>Scale to 10,000 Schools</h4><p>Active schools outreach, reputation API, certificate verify API, VS Code extension, in-browser IDE, offline mode, 10K schools target.</p><div class="roadmap-tags"><span>10K schools</span><span>Public API</span><span>Offline mode</span><span>VS Code ext</span></div></div></div>
     </div>
   </div>
 </div>
@@ -744,53 +840,35 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <section class="pad">
   <div class="wrap">
     <span class="section-tag">Market Size</span>
-    <h2 class="h2">The market is every person on earth<br>who wants to write code.</h2>
+    <h2 class="h2">The market is every person on earth<br>who wants a tech career.</h2>
     <div class="grid-line market-numbers">
-      <div class="market-number"><span class="big ac">$26B</span><span class="desc">Global online coding education market — growing 12% annually</span></div>
+      <div class="market-number"><span class="big ac">$26B</span><span class="desc">Global online tech education market — growing 12% annually</span></div>
       <div class="market-number"><span class="big">130M+</span><span class="desc">Schools worldwide — each one a potential Getintotech Schools customer at $10–$67/mo</span></div>
-      <div class="market-number"><span class="big ac">100M+</span><span class="desc">People actively learning to code — underserved by every existing free platform</span></div>
+      <div class="market-number"><span class="big ac">100M+</span><span class="desc">People actively learning tech skills — underserved by every existing free platform</span></div>
     </div>
   </div>
 </section>
 
-<!-- CROWDFUNDING -->
+<!-- CROWD -->
 <div class="bg-accent-faint pad" id="fund">
   <div class="wrap">
     <div class="crowd-inner">
       <span class="section-tag">Support the Build</span>
-      <h2>Help us build <em>free</em> developer education for everyone.</h2>
-      <p class="body-p">Not an investor? You can still be part of this. Every contribution funds the build and gets us to launch faster. We are not asking learners to pay — we are asking people who believe in this mission to back it.</p>
-
+      <h2>Help us build <em>free</em> tech education for everyone.</h2>
+      <p class="body-p">Not an investor? You can still be part of this. Every contribution funds the build and gets us to launch faster.</p>
       <div class="tiers">
-        <div class="tier">
-          <div class="tier-amount">Any amount</div>
-          <div class="tier-name">Supporter</div>
-          <p>Your name in the founding supporters list on the platform. You believed before anyone else did.</p>
-        </div>
-        <div class="tier featured">
-          <div class="tier-amount">$50+</div>
-          <div class="tier-name">Founding Member</div>
-          <p>Name in supporters list + Founding Member badge on profile + 6 months of Pro features free at launch.</p>
-        </div>
-        <div class="tier">
-          <div class="tier-amount">$200+</div>
-          <div class="tier-name">Co-Builder</div>
-          <p>Everything above + 12 months Pro at launch + monthly personal update from the founder until we ship.</p>
-        </div>
+        <div class="tier"><div class="tier-amount">Any amount</div><div class="tier-name">Supporter</div><p>Your name in the founding supporters list on the platform. You believed before anyone else.</p></div>
+        <div class="tier featured"><div class="tier-amount">$50+</div><div class="tier-name">Founding Member</div><p>Name in supporters list + Founding Member badge + 6 months of Pro features free at launch.</p></div>
+        <div class="tier"><div class="tier-amount">$200+</div><div class="tier-name">Co-Builder</div><p>Everything above + 12 months Pro at launch + monthly personal update from the founder until we ship.</p></div>
       </div>
-
       <div class="progress-wrap">
         <div class="progress-header">
           <span class="progress-raised" id="raised-amount">$0 raised</span>
-          <span class="progress-goal">Goal: $50,000</span>
+          <span class="progress-goal">Crowdfunding goal: $50,000</span>
         </div>
         <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-        <div class="progress-meta">
-          <span>Crowdfunding open now</span>
-          <span>getintotech.vercel.app</span>
-        </div>
+        <div class="progress-meta"><span>Crowdfunding open now</span><span>getintotech.vercel.app</span></div>
       </div>
-
       <div class="crowd-cta">
         <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="crowd-main-btn">❤️ Support Getintotech</a>
         <span class="crowd-note">Powered by Flutterwave · Cards, bank transfer, mobile money</span>
@@ -799,31 +877,31 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
   </div>
 </div>
 
-<!-- WHAT WE HAVE BUILT -->
+<!-- WHAT WE HAVE -->
 <section class="pad">
   <div class="wrap">
     <span class="section-tag">Where We Are</span>
-    <h2 class="h2">The platform is fully designed.<br>We are raising to <em>run it.</em></h2>
+    <h2 class="h2">Fully designed.<br>Raising to <em>run it.</em></h2>
     <div class="ready-grid">
       <div class="ready-col">
         <h3>What is already <em>done</em></h3>
         <div class="ready-list">
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>164-section master specification</h5><p>10,500+ lines. Every feature, edge case, revenue stream, legal consideration, and growth strategy documented before a line of code.</p></div></div>
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Complete design system</h5><p>Full CSS token system, component library, every page layout, all responsive breakpoints. Drop it into code and it works.</p></div></div>
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>500+ courses fully configured</h5><p>Course metadata, career tracks, lesson sequences, exam configurations, difficulty levels. Not a list — a production-ready dataset.</p></div></div>
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Business model validated</h5><p>Schools pricing confirmed through direct conversations with school administrators. Revenue model stress-tested across 7 streams.</p></div></div>
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>800-task build plan</h5><p>Day-by-day order. Every dependency mapped. V1 ships in exactly 4 weeks from first line of code. No guessing. No planning debt.</p></div></div>
-          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>22 unique features designed</h5><p>Not ideas — fully specified. Architecture chosen. Data models sketched. Edge cases solved. These are ready to build, not ready to explore.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>164-section master specification</h5><p>10,500+ lines. Every feature, edge case, revenue stream, and growth strategy documented. Most funded startups never get this deep before launch.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Complete design system</h5><p>Full CSS token system, component library, every page layout, all responsive breakpoints. Drop into code and it works immediately.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>500+ courses fully configured</h5><p>Course metadata, career tracks, lesson sequences, exam configurations across every tech discipline. Not a list — a production-ready dataset.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>Business model validated</h5><p>Schools pricing confirmed through direct conversations with administrators. Revenue model stress-tested across 7 streams. Unit economics confirmed.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>800-task build plan</h5><p>Day-by-day order. Every dependency mapped. V1 ships in exactly 4 weeks from first line of code. No planning debt whatsoever.</p></div></div>
+          <div class="ready-item"><span class="ready-check">✓</span><div class="ready-item-text"><h5>23 unique features fully specified</h5><p>Not ideas — fully designed. Architecture chosen. Data models sketched. Edge cases solved. Ready to build, not ready to explore.</p></div></div>
         </div>
       </div>
       <div class="ready-col">
         <h3>What is <em>left</em></h3>
         <div class="ready-what-left">
           <h4>Running code. That is it.</h4>
-          <p>Most pre-seed startups raise to figure out what to build. We are raising to execute what is already designed. The difference matters enormously.</p>
-          <p><strong>When you fund most pre-seed startups:</strong> They spend 6 months figuring out the product, 6 months building it, then launch with something half-baked and iterate.</p>
-          <p><strong>When you fund Getintotech:</strong> Week 1 we write code. Week 4 we launch V1. Month 3 we have schools. Month 12 we have 10,000 schools.</p>
-          <p><strong>The risk is not "will they figure it out." The risk is "will they execute." And the founder has 7+ years of production engineering to answer that.</strong></p>
+          <p>Most pre-seed startups raise to figure out what to build. We are raising to execute what is already fully designed. That difference matters enormously to execution speed and investor risk.</p>
+          <p><strong>Typical pre-seed startup:</strong> Raise → 6 months figuring out the product → 6 months building → launch with something half-baked.</p>
+          <p><strong>Getintotech:</strong> Raise → Week 1 we write code → Week 4 we launch V1 → Month 3 we have schools → Month 12 we have 10,000 schools.</p>
+          <p><strong>The risk is not "will they figure it out." The risk is execution. And the founder has 7+ years of production engineering to answer that question.</strong></p>
         </div>
       </div>
     </div>
@@ -833,15 +911,15 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <!-- RISKS -->
 <div class="bg-card pad">
   <div class="wrap">
-    <span class="section-tag">Risks — And How We Think About Them</span>
-    <h2 class="h2">We know the risks.<br>We have thought through them.</h2>
+    <span class="section-tag">Risks — We Have Thought About Them</span>
+    <h2 class="h2">We name the risks.<br>We answer them.</h2>
     <div class="risks-grid">
-      <div class="risk-card"><span class="risk-label">Risk 01</span><h4>AI API cost at scale</h4><p>Claude API is our biggest cost. At 100K active users doing 10 messages/day, that is ~$15,000/mo. <strong>Mitigation:</strong> Pro subscription caps AI usage. Free tier has a daily message limit. Schools AI usage is billed into the subscription. We model this carefully before every pricing decision.</p></div>
-      <div class="risk-card"><span class="risk-label">Risk 02</span><h4>Exam integrity</h4><p>What if someone finds a way to cheat? <strong>Mitigation:</strong> Unique test cases per attempt make sharing useless. Tab-switching tracking. Employer-requested webcam proctoring. Certificate links to a live blockchain record. The whole system is designed around this.</p></div>
-      <div class="risk-card"><span class="risk-label">Risk 03</span><h4>Larger platforms copying features</h4><p>What if Coursera or Udemy copies us? <strong>Mitigation:</strong> They cannot ship free. Their entire business model is charging learners. Flipping to free would destroy their revenue. We are structurally protected by being the only platform whose incentives are fully aligned with learners.</p></div>
-      <div class="risk-card"><span class="risk-label">Risk 04</span><h4>COPPA compliance (children's data)</h4><p>Schools means children under 13. COPPA violations are serious. <strong>Mitigation:</strong> $50K of the raise is earmarked for legal and compliance. COPPA-compliant data handling is designed into the schools product from the start, not retrofitted later.</p></div>
-      <div class="risk-card"><span class="risk-label">Risk 05</span><h4>School sales cycle is long</h4><p>Schools can take 6–12 months to make purchasing decisions. <strong>Mitigation:</strong> We target individual teachers first — they sign up schools. Teacher adoption converts to school contracts. We also target private schools, coding academies, and bootcamps with faster decision cycles first.</p></div>
-      <div class="risk-card"><span class="risk-label">Risk 06</span><h4>Solo founder execution risk</h4><p>What if the founder burns out or gets stuck? <strong>Mitigation:</strong> The 164-section spec means no decision paralysis. Every engineering choice is already made. The build plan is 800 specific tasks. This is execution, not exploration. And funding means the founder can hire before it becomes a single point of failure.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 01</span><h4>AI API cost at scale</h4><p>Claude API is our biggest cost. At 100K active users doing 10 messages/day, ~$15,000/mo. <strong>Mitigation:</strong> Free tier has daily message limit. Pro subscription is uncapped. Schools AI usage is built into subscription pricing.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 02</span><h4>Exam integrity</h4><p>What if someone cheats? <strong>Mitigation:</strong> Unique test cases per attempt make sharing useless. Tab-switching tracked. Employer-requested webcam proctoring available. Certificate links to live blockchain record.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 03</span><h4>Larger platforms copying features</h4><p>What if Coursera copies us? <strong>Mitigation:</strong> They cannot ship free — their business model is charging learners. Flipping to free would destroy their revenue. We are structurally protected by aligned incentives.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 04</span><h4>COPPA compliance — children's data</h4><p>Schools means children under 13. COPPA violations are serious. <strong>Mitigation:</strong> $50K earmarked for legal and compliance. COPPA-compliant data handling designed into the schools product from day one.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 05</span><h4>School sales cycle is long</h4><p>Schools can take 6–12 months to decide. <strong>Mitigation:</strong> We target individual teachers first — they pull schools in. Private schools, coding academies, and bootcamps have faster cycles and come first.</p></div>
+      <div class="risk-card"><span class="risk-label">Risk 06</span><h4>Solo founder execution risk</h4><p>What if the founder gets stuck? <strong>Mitigation:</strong> The 164-section spec means no decision paralysis. The build plan is 800 specific tasks. Funding means the founder can hire before it becomes a single point of failure.</p></div>
     </div>
   </div>
 </div>
@@ -851,14 +929,18 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
   <div class="wrap founder-layout">
     <div>
       <span class="section-tag">The Founder</span>
-      <div class="founder-quote">"I started learning to code in high school. The platforms were broken. The good ones cost money I didn't have. I built what I needed."</div>
+      <div class="founder-quote">"I started learning tech in high school. The platforms were broken. The good ones cost money I didn't have. I built what I needed."</div>
     </div>
     <div>
       <div class="founder-bio">
         <h3>Olamilekan Akinuli</h3>
         <span class="founder-role">Founder &amp; Builder — lekanakinuli@gmail.com</span>
-        <p>7+ year software engineer who started learning in high school and experienced the broken developer education system firsthand. Not a first-time builder searching for a problem — an engineer who lived the problem for years and decided to fix it permanently.</p>
-        <p>Building Getintotech solo: the 164-section specification, every design decision, every line of code. The same person who felt the problem is the person who has already designed the solution in full.</p>
+        <p>7+ year software engineer who started learning tech in high school and experienced the broken education system firsthand. Not a first-time builder searching for a problem — an engineer who lived the problem and decided to fix it permanently.</p>
+        <p>Building Getintotech solo: the 164-section specification, every design decision, every architectural choice. The same person who felt the problem has already designed the complete solution.</p>
+        <div class="founder-actions">
+          <a href="https://calendly.com/shrawn/online-meetings" target="_blank" class="btn-accent">Book a call →</a>
+          <a href="mailto:lekanakinuli@gmail.com" class="btn-outline">Send an email</a>
+        </div>
       </div>
       <div class="founder-stats">
         <div class="founder-stat"><span class="val">7+</span><span class="lbl">years engineering</span></div>
@@ -874,36 +956,15 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <div class="bg-card2 pad" id="faq">
   <div class="wrap" style="max-width:800px">
     <span class="section-tag">FAQ</span>
-    <h2 class="h2">The questions investors<br>always ask.</h2>
+    <h2 class="h2">Questions investors<br>and supporters ask.</h2>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q">Why will it always be free for learners? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">Because charging learners is the wrong business model. The people who most need better credentials are the least able to pay for them. Revenue comes from schools, companies, job listings, and employers — the people who benefit from a trained workforce. Learners never pay. That is not a strategy. It is a commitment.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How do you stop people cheating on the exams? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">Unique test cases generated for every attempt. There is nothing to Google because the inputs are different every time. Tab-switching is tracked. Webcam proctoring available for employer-requested verification. The certificate links to a live blockchain record — any employer can verify it was earned by a real person in real time.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Why hasn't this been built already? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">Most edtech companies are built to extract money from learners. Subscriptions, paid certificates, course bundles — the incentive is to maximise revenue from the audience. We flipped it. Revenue comes from employers and schools. That model is harder to build but creates a genuinely aligned product. Nobody has done it at this scope because the easier path was always to charge learners.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Is $500K pre-seed too much to raise? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">The number is justified line by line — see the breakdown above. The AI API cost alone at scale is $180K/year. COPPA compliance for a children's platform is non-negotiable and expensive. Schools sales outreach is not free. We are also open to a bridge raise of $100–150K to get to launch and first 500 schools, then return for the full round with traction. First check can be from $25K.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What does my donation actually fund? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">Infrastructure during build (Supabase, Vercel, Claude API), the blockchain certificate system, worked example video production, and runway to reach the first schools. Every pound and dollar goes directly into the product. The founder is not drawing a salary until revenue starts.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What happens to certificates if Getintotech shuts down? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">Every certificate hash is stored permanently on the Polygon blockchain. The verification logic will be open-sourced so any employer can verify certificates even with no platform running. Learners can export all their data at any time. We are designing for permanence, not dependency.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Why should schools trust a platform that hasn't launched? <span class="faq-arrow">+</span></button>
-        <div class="faq-a">They should not — yet. We are targeting early-adopter schools and individual teachers who are willing to test new tools. Their feedback shapes V1. Schools with formal procurement processes come later when we have case studies. This is standard go-to-market for any new edtech product.</div>
-      </div>
+      <div class="faq-item"><button class="faq-q">Why will it always be free for learners? <span class="faq-arrow">+</span></button><div class="faq-a">Because charging learners is the wrong business model. The people who most need better credentials are the least able to pay. Revenue comes from schools, companies, job listings, and employers — the people who benefit from a trained workforce. Learners never pay. That is a commitment, not a strategy.</div></div>
+      <div class="faq-item"><button class="faq-q">How do you stop people cheating on exams? <span class="faq-arrow">+</span></button><div class="faq-a">Unique test cases are generated for every attempt. There is nothing to Google because the inputs are different every time. Tab-switching is tracked. Webcam proctoring is available. The certificate links to a live blockchain record any employer can verify in real time.</div></div>
+      <div class="faq-item"><button class="faq-q">Why hasn't this been built already? <span class="faq-arrow">+</span></button><div class="faq-a">Most edtech companies charge learners. Subscriptions, paid certificates, course bundles — the incentive is to maximise revenue from the audience. We flipped it. Revenue comes from schools and employers. That model is harder to build but creates a genuinely aligned product. Nobody has done it at this scope.</div></div>
+      <div class="faq-item"><button class="faq-q">What if I can only invest a small amount? <span class="faq-arrow">+</span></button><div class="faq-a">There is no minimum. A $25K check is as welcome as a $500K check. The first investor on the cap table — regardless of size — creates social proof that makes every subsequent conversation easier. If you believe in this, get in early.</div></div>
+      <div class="faq-item"><button class="faq-q">What does my donation actually fund? <span class="faq-arrow">+</span></button><div class="faq-a">Infrastructure during build (Supabase, Vercel, Claude API), the blockchain certificate system, content production, and runway to reach the first schools. The founder is not drawing a salary until revenue starts. Every contribution goes directly into the product.</div></div>
+      <div class="faq-item"><button class="faq-q">What happens to certificates if Getintotech shuts down? <span class="faq-arrow">+</span></button><div class="faq-a">Every certificate hash is stored permanently on the Polygon blockchain. The verification logic will be open-sourced so any employer can verify certificates even with no platform running. Learners can export all their data at any time. We are designing for permanence.</div></div>
+      <div class="faq-item"><button class="faq-q">How does school onboarding really work in 10 minutes? <span class="faq-arrow">+</span></button><div class="faq-a">Admin signs up and enters school details in 2 minutes. Teachers are added via CSV upload or shareable link — they create accounts with one click. Students join a class using a 6-character code or QR code. No student emails required. Platform suggests age-appropriate curriculum. First lesson is ready immediately. Total: under 10 minutes, zero IT knowledge needed.</div></div>
     </div>
   </div>
 </div>
@@ -911,22 +972,40 @@ footer p{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted)}
 <!-- CTA -->
 <div class="cta-wrap">
   <h2>Let's build this together.</h2>
-  <p>Pre-seed round open. Crowdfunding live. If you believe developer education should be free and credentials should mean something — we need you.</p>
+  <p>Pre-seed open. Every check size welcome. Crowdfunding live. If you believe tech education should be free — we need you.</p>
   <div class="cta-buttons">
+    <a href="https://calendly.com/shrawn/online-meetings" target="_blank" class="btn-dark">📅 Book a call</a>
     <a href="https://flutterwave.com/donate/mylorbasqb9e" target="_blank" class="btn-dark">❤️ Support the Build</a>
-    <a href="mailto:lekanakinuli@gmail.com" class="btn-dark-outline">Talk to the Founder</a>
+    <a href="mailto:lekanakinuli@gmail.com" class="btn-dark2">lekanakinuli@gmail.com</a>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <a href="#" class="logo">get<span style="color:var(--accent)">into</span>tech</a>
-  <p>© 2025 Getintotech. Free developer education. Real credentials.</p>
+  <p>© 2025 Getintotech. Free tech education. Real credentials.</p>
   <p>lekanakinuli@gmail.com · <a href="https://getintotech.vercel.app" style="color:var(--muted);text-decoration:none">getintotech.vercel.app</a></p>
 </footer>
 
 <script>
-// FAQ accordion
+// hamburger
+const ham = document.getElementById('hamburger');
+const menu = document.getElementById('mobile-menu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('active');
+  menu.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+});
+// close on link click
+menu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    ham.classList.remove('active');
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// FAQ
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
@@ -936,7 +1015,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-// Progress bar
+// progress bar
 let animated = false;
 const observer = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting && !animated) {
@@ -948,7 +1027,7 @@ const observer = new IntersectionObserver(entries => {
 const fundEl = document.getElementById('fund');
 if (fundEl) observer.observe(fundEl);
 
-// Smooth scroll
+// smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
